@@ -1,0 +1,272 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
+:root {
+	--dark-light: #dddddd;
+	--dark-darkest: #1c1c1c;
+	--dark-dark: #3a3a3a;
+	--dark-font: #fff;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+body {
+	background-color: var(--dark-dark);
+	font-size: 15px;
+	font-family: 'Comfortaa', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+		sans-serif;
+	line-height: 1.4;
+}
+
+ul {
+	list-style-type: none;
+}
+.navbar {
+	display: flex;
+	justify-content: space-between;
+	background-color: var(--dark-darkest);
+	padding: 10px 20px;
+	color: var(--dark-font);
+	align-items: center;
+}
+
+.navbar nav ul {
+	display: flex;
+	align-items: flex-start;
+}
+
+.navbar nav ul li {
+	width: 40px;
+	background-color: var(--dark-dark);
+	height: 40px;
+	margin-left: 10px;
+	border-radius: 5px;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+}
+
+a {
+	color: var(--dark-font);
+	text-decoration: none;
+}
+
+.top-section {
+	background-color: var(--dark-darkest);
+	padding: 50px 40px 100px 40px;
+	display: flex;
+}
+
+.profile .navbar {
+	padding: 30px 50px;
+}
+
+.profilia-logo {
+	text-transform: uppercase;
+	font-family: 'Kalam', cursive;
+}
+
+.profile-pic {
+	width: 200px;
+	height: 200px;
+	object-fit: cover;
+	border-radius: 100px;
+}
+
+.top-details {
+	margin: 0 40px;
+	color: var(--dark-font);
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	flex-direction: column;
+}
+
+.top-details q {
+	line-height: 1.3;
+	margin: 10px 0;
+	max-width: 800px;
+	font-size: 16px;
+}
+.top-follow-details {
+	line-height: 1.5;
+	margin-top: 10px;
+}
+.top-follow-details i {
+	width: 20px;
+	text-align: center;
+	height: 20px;
+}
+
+button {
+	border: none;
+	cursor: pointer;
+	outline: none;
+	border-radius: 10px;
+}
+
+.edit-profile-btn,
+.follow-profile-btn,
+.unfollow-profile-btn {
+	background-color: #087afd;
+	padding: 12px;
+	font-size: 20px;
+	margin: 20px 10px 0px 0;
+	color: var(--dark-font);
+}
+.follow-profile-btn {
+	background-color: #ff3c3c;
+}
+.unfollow-profile-btn {
+	background-color: #fff;
+	color: #ff3c3c;
+}
+.profile-nav {
+	display: flex;
+	justify-content: space-evenly;
+	background-color: var(--dark-darkest);
+	margin: 20px auto;
+	border-radius: 10px;
+	width: 70%;
+}
+.profile-nav li {
+	cursor: pointer;
+	padding: 20px;
+	color: var(--dark-font);
+	text-align: center;
+	width: 100%;
+	border-radius: 10px;
+	height: 100%;
+}
+.profile-nav li:hover {
+	background-color: rgb(95, 95, 95);
+}
+.profile-nav .active {
+	background-color: var(--dark-light);
+	color: #000;
+}
+.profile-nav .active:hover {
+	background-color: var(--dark-light);
+}
+
+.navbar-pic {
+	width: 40px;
+	margin-left: 10px;
+	border-radius: 5px;
+	height: 40px;
+}
+
+.top-follow-details span {
+	font-size: 17px;
+}
+.post {
+	width: 70%;
+	border-radius: 10px;
+	padding: 20px;
+	margin: 40px auto;
+	background-color: #1c1c1c;
+	color: #fff;
+}
+
+.post-profile-pic {
+	width: 50px;
+	height: 50px;
+	border-radius: 10px;
+	margin-right: 20px;
+}
+.post-author-details {
+	margin: 0 0 20px 0;
+	display: flex;
+	align-items: center;
+}
+
+.post-likes-comments {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+.post-likes-comments div {
+	width: 100%;
+	text-align: center;
+	height: 100%;
+	padding: 10px;
+}
+
+.post-like {
+	background-color: #ff3c3c;
+	border-radius: 10px 0 0 10px;
+}
+
+.post-comments {
+	background-color: #087afd;
+	border-radius: 0 10px 10px 0;
+}
+
+.login,
+.signup {
+	background-image: url('./img/bg.jpeg');
+	background-size: cover;
+	background-position: center;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	color: #fff;
+	height: 100vh;
+	display: flex;
+}
+
+.login {
+	flex-direction: column;
+}
+.login form,
+.signup form {
+	margin: 10px auto;
+	background-color: #1c1c1c;
+	padding: 40px;
+	color: #fff;
+	border-radius: 10px;
+	width: 350px;
+}
+form div {
+	display: flex;
+	margin: 12px 0;
+	flex-direction: column;
+}
+form input {
+	border-radius: 10px;
+	outline: none;
+	border: none;
+	padding: 10px;
+	font-size: 18px;
+}
+
+form div * {
+	margin: 3px 0;
+}
+
+form button {
+	background-color: #087afd;
+	font-size: 20px;
+	padding: 10px;
+	color: #fff;
+}
+
+form .btn-div {
+	text-align: center;
+	margin: 20px 0;
+}
+
+.signup-intro {
+	background-color: #1c1c1c;
+	padding: 40px;
+	color: #fff;
+	line-height: 2;
+	margin: auto;
+	border-radius: 10px;
+	font-size: 17px;
+	width: 60%;
+}

@@ -1,0 +1,23 @@
+
+POST http://localhost:5000/signup
+Content-Type: application/json
+
+{
+  "firstName": "abc",
+  "lastName": "abc",
+  "email":"abc@abc.com",
+  "password": "abcabc",
+  "country": "Country"
+}
+
+###
+
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+  "email":"abc@abc.com",
+  "password": "abcabc"
+}
+
+###

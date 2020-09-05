@@ -1,7 +1,11 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import PostForm from './PostForm'
 
 const Navbar = () => {
+	const [modal, setModal] = useState(false)
+	const [search, setSearch] = useState('')
+	const history = useHistory()
 	return (
 		<div className="navbar">
 			<div>
@@ -9,16 +13,23 @@ const Navbar = () => {
 			</div>
 			<nav>
 				<ul>
-					<li>
-						<Link to="#">
-							<i className="fa fa-home"></i>
-						</Link>
-					</li>
-					<li>
-						<Link to="#">
-							<i className="fa fa-cog"></i>
-						</Link>
-					</li>
+					<div className="navbar-search">
+						<input type="text" onChange={(e) => setSearch(e.target.value)} />
+						<button
+							className="search-btn fa fa-search"
+							onClick={() => {
+								if (search) {
+									history.push({ pathname: '/search', state: { search } })
+								}
+							}}
+						></button>
+					</div>
+					<Link to="#" onClick={() => setModal(true)}>
+						<i className="fa fa-plus"></i>
+					</Link>
+					<Link to="/home">
+						<i className="fa fa-home"></i>
+					</Link>
 					<Link to="/profile">
 						<img
 							className="navbar-pic"
@@ -27,6 +38,7 @@ const Navbar = () => {
 					</Link>
 				</ul>
 			</nav>
+			<PostForm modal={modal} setModal={setModal} />
 		</div>
 	)
 }

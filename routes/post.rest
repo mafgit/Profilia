@@ -1,4 +1,8 @@
-GET http://localhost:5000/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiY0BhYmMuY29tIiwiaWF0IjoxNTk4ODI1MjAwfQ.8jwwGn4PFmqf_hcsdSG4EMqkTH2asMpSL_UToqB8-ls
 
+POST http://localhost:5000/post_post_likes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiY0BhYmMuY29tIiwiaWF0IjoxNTk5MDY5NDQ2fQ.rYja3AIct-5pO_qbeQzQ4OuqI1gDeW3YKVrHTnRyDqs
+Content-Type: application/json
 
+{
+  "postId": "5f4c2fc51f295c362930cede"
+}

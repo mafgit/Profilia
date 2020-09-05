@@ -1,12 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import axios from 'axios'
 import { Link, useHistory } from 'react-router-dom'
 import Cookies from 'universal-cookie'
-
+import { AuthContext } from '../App'
 const Login = () => {
+	const { state, dispatch } = useContext(AuthContext)
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const history = useHistory()
+	useEffect(() => {
+		if (state.authenticated) {
+			history.push('/home')
+		}
+	}, [state])
 	const handleSubmit = (e) => {
 		e.preventDefault()
 		// Some validation ............
@@ -25,7 +31,8 @@ const Login = () => {
 						path: '/',
 						maxAge: 60 * 60 * 24 * 3,
 					})
-					history.push('/profile')
+					dispatch({ type: 'LOGIN', payload: res.data.user.email })
+					history.push('/home')
 				}
 			})
 			.catch((err) => console.log(err))

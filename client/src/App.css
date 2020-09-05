@@ -28,7 +28,7 @@ ul {
 	display: flex;
 	justify-content: space-between;
 	background-color: var(--dark-darkest);
-	padding: 10px 20px;
+	padding: 30px 50px;
 	color: var(--dark-font);
 	align-items: center;
 }
@@ -38,17 +38,40 @@ ul {
 	align-items: flex-start;
 }
 
-.navbar nav ul li {
-	width: 40px;
+.navbar nav ul a,
+.search-btn {
 	background-color: var(--dark-dark);
+	width: 40px;
 	height: 40px;
-	margin-left: 10px;
+	color: #fff;
 	border-radius: 5px;
 	justify-content: center;
 	align-items: center;
 	display: flex;
 }
-
+.navbar-search {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-left: 10px;
+}
+.navbar nav ul a {
+	margin-left: 10px;
+}
+.navbar-search button {
+	border-radius: 0 5px 5px 0;
+}
+.navbar-search input {
+	border-radius: 5px 0 0 5px;
+	color: #fff;
+	width: 200px;
+	transition: 0.3s;
+	background-color: var(--dark-dark);
+}
+.navbar-search input:focus {
+	width: 250px;
+	transition: 0.3s;
+}
 a {
 	color: var(--dark-font);
 	text-decoration: none;
@@ -58,10 +81,6 @@ a {
 	background-color: var(--dark-darkest);
 	padding: 50px 40px 100px 40px;
 	display: flex;
-}
-
-.profile .navbar {
-	padding: 30px 50px;
 }
 
 .profilia-logo {
@@ -236,9 +255,11 @@ form div {
 	margin: 12px 0;
 	flex-direction: column;
 }
-form input {
+input,
+textarea {
 	border-radius: 10px;
 	outline: none;
+	font-family: inherit;
 	border: none;
 	padding: 10px;
 	font-size: 18px;
@@ -269,4 +290,125 @@ form .btn-div {
 	border-radius: 10px;
 	font-size: 17px;
 	width: 60%;
+}
+
+.follower {
+	width: 350px;
+	height: 100px;
+	background-color: var(--dark-darkest);
+	color: var(--dark-font);
+	display: flex;
+	margin: 10px auto;
+	border-radius: 10px;
+	padding: 10px 15px;
+	align-items: center;
+}
+
+.follower a {
+	align-items: center;
+	display: flex;
+}
+
+.follower-details {
+	font-size: 13px;
+	justify-content: center;
+	display: flex;
+	align-items: flex-start;
+	margin: 0 20px;
+	flex-direction: column;
+}
+
+.follower img {
+	width: 60px;
+	height: 60px;
+	object-fit: cover;
+	border-radius: 10px;
+}
+
+.followers {
+	grid-template-columns: 1fr 1fr 1fr;
+}
+.modal-wrap {
+	background-color: rgba(0, 0, 0, 0.794);
+	position: fixed;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.postform {
+	display: flex;
+	flex-direction: column;
+	width: 60%;
+}
+.postform textarea {
+	background-color: var(--dark-darkest);
+	color: #fff;
+	margin-bottom: 20px;
+	min-height: 200px;
+	height: 200px;
+	min-width: 100%;
+	max-width: 100%;
+	overflow: hidden;
+}
+.liked {
+	background-color: var(--dark-light);
+	color: #ff2b2b;
+}
+
+.unfollow-btn {
+	width: 40px;
+	background-color: var(--dark-dark);
+	height: 40px;
+	border-radius: 5px;
+	font-size: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-left: auto;
+	color: #fff;
+}
+.loading-h3 {
+	text-align: center;
+	color: #fff;
+	margin: auto;
+	margin-bottom: 20px;
+}
+
+.search-results {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+}
+.search-result {
+	background-color: var(--dark-darkest);
+	margin: 20px auto;
+	cursor: pointer;
+	display: flex;
+	min-width: 300px;
+	color: #fff;
+	border-radius: 10px;
+	padding: 10px;
+	align-items: center;
+}
+
+.search-result img {
+	width: 50px;
+	height: 50px;
+	border-radius: 5px;
+	object-fit: cover;
+}
+.search-result .result-details {
+	margin: 0 20px;
+}
+
+.search-result .result-details h1 {
+	font-size: 22px;
+}
+
+.search-result .result-details h2 {
+	font-size: 16px;
 }

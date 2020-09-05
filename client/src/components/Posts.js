@@ -4,31 +4,42 @@ import axios from 'axios'
 import Cookies from 'universal-cookie'
 
 const Posts = () => {
+	const [error, setError] = useState('')
+	const [loading, setLoading] = useState(true)
 	const cookies = new Cookies()
 	const [posts, setPosts] = useState([
 		{
-			id: null,
-			body: '',
-			author: '',
-			likes: [],
-			comments: [],
+			// _id: null,
+			// body: '',
+			// author: '',
+			// likes: [],
+			// comments: [],
 		},
 	])
 	useEffect(() => {
+		setError('')
 		axios({
 			url: '/get_posts',
 			method: 'GET',
 			headers: { Authorization: `Bearer ${cookies.get('jwt')}` },
 		}).then((res) => {
-			console.log(res)
-			setPosts(res.data.posts)
+			if (res.data.error === 'no posts') {
+				setError('no posts')
+			} else {
+				setPosts(res.data.posts)
+			}
+			setLoading(false)
 		})
 	}, [])
 	return (
-		<div>
-			{posts.map((post) => (
-				<Post key={post.id} post={post} />
-			))}
+		<div className="profile-posts">
+			{!loading && !error ? (
+				posts.map((post) => <Post key={post._id} post={post} />)
+			) : !loading && error ? (
+				<h3 className="loading-h3">You don't have any posts</h3>
+			) : (
+				<h3 className="loading-h3">Loading...</h3>
+			)}
 		</div>
 	)
 }

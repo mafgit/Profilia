@@ -9,7 +9,7 @@ const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
 
 module.exports = {
 	signup_post: (req, res) => {
-		const { firstName, lastName, email, password, country } = req.body
+		const { fullName, email, password, password2, country } = req.body
 		let errors = []
 		if (email) {
 			User.findOne({ email }).then((findEmail) => {
@@ -22,8 +22,11 @@ module.exports = {
 				if (password.length < 6) {
 					errors.push('Minimum length of password is 6 characters')
 				}
-				if (!firstName || !lastName || !email || !password || !country) {
+				if (!fullName || !email || !password2 || !password || !country) {
 					errors.push('Please fill in all the fields')
+				}
+				if (password !== password2) {
+					errors.push('Passwords do not match')
 				}
 				if (errors.length > 0) {
 					return res.status(400).json({ errors })
@@ -33,8 +36,7 @@ module.exports = {
 						bcrypt.hash(password, salt, (err, hashedPassword) => {
 							if (err) console.log(err)
 							User.create({
-								firstName,
-								lastName,
+								fullName,
 								email,
 								password: hashedPassword,
 								country,
@@ -44,7 +46,20 @@ module.exports = {
 								following: [],
 								followers: [],
 							})
-								.then((user) => res.json({ newUser: user._id }))
+								.then((user) => {
+									if (user) {
+										jwt.sign(
+											{ _id: user._id, email: user.email },
+											process.env.JWT_SECRET,
+											(err, token) => {
+												return res.json({
+													token,
+													user: { email: user.email, _id: user._id },
+												})
+											}
+										)
+									}
+								})
 								.catch((err) => console.log(err))
 						})
 					})
@@ -59,9 +74,16 @@ module.exports = {
 				if (user) {
 					bcrypt.compare(password, user.password, (err, isMatch) => {
 						if (isMatch) {
-							jwt.sign({ email }, process.env.JWT_SECRET, (err, token) => {
-								res.json({ token, user })
-							})
+							jwt.sign(
+								{ _id: user._id, email },
+								process.env.JWT_SECRET,
+								(err, token) => {
+									return res.json({
+										token,
+										user: { email: user.email, _id: user._id },
+									})
+								}
+							)
 						} else {
 							return res.status(400).json({ errors: ['Invalid credentials'] })
 						}
@@ -73,6 +95,9 @@ module.exports = {
 		} else {
 			return res.status(400).json({ errors: ['Please fill all the fields'] })
 		}
+	},
+	check_auth: (req, res) => {
+		res.json({ userEmail: req.userEmail })
 	},
 }
 

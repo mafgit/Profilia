@@ -1,4 +1,6 @@
 const jwt = require('jsonwebtoken')
+const ObjectId = require('mongoose').Types.ObjectId
+
 const verifyToken = (req, res, next) => {
 	let token = req.headers['authorization']
 	if (token && typeof token !== undefined) {
@@ -6,7 +8,7 @@ const verifyToken = (req, res, next) => {
 		jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
 			if (err) return res.status(401).json({ error: 'Unauthorized' })
 			req.userEmail = decoded.email
-			req.userId = decoded._id
+			req.userId = ObjectId(decoded._id)
 			next()
 		})
 	} else {

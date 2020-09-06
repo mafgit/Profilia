@@ -8,11 +8,11 @@ const {
 const {
 	get_profile,
 	get_posts,
-	get_followers,
-	get_following,
+	get_follow,
 	create_post,
-	post_post_likes,
-	unfollow,
+	get_home,
+	change_post_like,
+	changeFollow,
 	search_users,
 } = require('../controllers/dataController')
 
@@ -21,13 +21,13 @@ router.post('/login', login_post)
 router.post('/search_users', verifyToken, search_users)
 router.get('/check_auth', verifyToken, check_auth)
 
-router.get('/profile', verifyToken, get_profile)
-router.get('/get_posts', verifyToken, get_posts)
-router.get('/get_followers', verifyToken, get_followers)
-router.get('/get_following', verifyToken, get_following)
+router.get('/get_home', verifyToken, get_home)
+router.post('/profile', verifyToken, get_profile)
+router.post('/get_posts', verifyToken, get_posts)
+router.get('/get_follow/:follow/:id', verifyToken, get_follow)
 
 router.post('/create_post', verifyToken, create_post)
-router.post('/post_post_likes', verifyToken, post_post_likes)
-router.post('/unfollow', verifyToken, unfollow)
+router.post('/change_post_like', verifyToken, change_post_like)
+router.get('/:type/:id', verifyToken, changeFollow)
 
 module.exports = router

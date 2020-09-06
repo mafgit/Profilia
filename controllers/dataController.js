@@ -1,54 +1,47 @@
 const User = require('../models/User')
 const Post = require('../models/Post')
-const ObjectId = require('mongodb').ObjectID
+const ObjectId = require('mongoose').Types.ObjectId
 module.exports = {
 	get_profile: (req, res) => {
-		User.findOne({ email: req.userId }, (err, user) => {
+		User.findById(req.body.id, (err, user) => {
 			res.json({ user })
 		})
 	},
 	get_posts: (req, res) => {
-		Post.find({ author: req.userEmail }, (err, posts) => {
+		Post.find({ author: req.userId }, (err, posts) => {
 			res.json({ posts })
 		})
 	},
-	get_followers: (req, res) => {
-		const arr = []
-		User.findOne({ email: req.userEmail }).then((user) => {
-			user.followers.forEach((follower, i) => {
-				User.findById(follower, (err, user) => {
-					const { fullName, country, image, _id } = user
-					arr.push({ fullName, country, image, _id })
-					if (i === arr.length - 1) {
-						return res.json({ followers: arr })
-					}
-				})
-			})
-		})
-	},
-	get_following: (req, res) => {
-		const arr = []
-		User.findOne({ email: req.userEmail }).then((user) => {
-			user.following.forEach((followingOne, i) => {
-				User.findById(followingOne, (err, user) => {
-					const { fullName, country, image, _id } = user
-					arr.push({ fullName, country, image, _id })
-					if (i === arr.length - 1) {
-						return res.json({ following: arr })
-					}
+	get_follow: (req, res) => {
+		const { id, follow } = req.params
+		User.findById(ObjectId(id), (err, user) => {
+			User.find({ _id: { $in: user[follow] } }).then((result) => {
+				res.json({
+					result: result.map((f) => ({
+						fullName: f.fullName,
+						image: f.image,
+						country: f.country,
+						_id: f._id,
+					})),
 				})
 			})
 		})
 	},
 	create_post: (req, res) => {
 		const { body } = req.body
-		Post.create({ body, author: req.userEmail, likes: [], comments: [] }).then(
-			(post) => {
+		User.findById(req.userId, (err, user) => {
+			Post.create({
+				body,
+				author: req.userId,
+				authorName: user.fullName,
+				likes: [],
+				comments: [],
+			}).then((post) => {
 				res.json({ created_post: post })
-			}
-		)
+			})
+		})
 	},
-	post_post_likes: (req, res) => {
+	change_post_like: (req, res) => {
 		const { postId, type } = req.body
 		let updates = {}
 		if (type === 'like') {
@@ -65,19 +58,6 @@ module.exports = {
 			return res.json({ post })
 		})
 	},
-	unfollow: (req, res) => {
-		const unfollowId = req.body.id
-		User.findByIdAndUpdate(
-			req.userId,
-			{
-				$pull: { following: ObjectId(unfollowId) },
-			},
-			{ new: true }
-		).exec((err, user) => {
-			if (err) throw err
-			res.json({ following: user.following })
-		})
-	},
 	search_users: (req, res) => {
 		let regexp = new RegExp(req.body.search, 'gi')
 		console.log(req.body.search)
@@ -85,4 +65,41 @@ module.exports = {
 			.then((users) => res.json({ users }))
 			.catch((err) => console.log(err))
 	},
+	changeFollow: (req, res) => {
+		const id = ObjectId(req.params.id)
+		const { type } = req.params
+		if (id != req.userId) {
+			const update1 =
+				type === 'follow'
+					? {
+							$addToSet: { following: id },
+					  }
+					: { $pull: { following: id } }
+			const update2 =
+				type === 'follow'
+					? {
+							$addToSet: { followers: req.userId },
+					  }
+					: {
+							$pull: { followers: req.userId },
+					  }
+
+			Promise.all([
+				User.findByIdAndUpdate(req.userId, update1, { new: true }),
+				User.findByIdAndUpdate(id, update2, { new: true }),
+			]).then((result) => {
+				res.json({ followers: result[1].followers })
+			})
+		}
+	},
+	get_home: (req, res) => {
+		User.findById(req.userId).then((user) => {
+			Post.find({ _id: { $in: user.followers } }).then((posts) => {
+				return res.json({ posts })
+			})
+		})
+	},
 }
+
+// notify
+// follow, unfollow, post created, deleted, updated, profile updated

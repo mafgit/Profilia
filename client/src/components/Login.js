@@ -10,7 +10,7 @@ const Login = () => {
 	const history = useHistory()
 	useEffect(() => {
 		if (state.authenticated) {
-			history.push('/home')
+			history.push('/')
 		}
 	}, [state])
 	const handleSubmit = (e) => {
@@ -31,8 +31,8 @@ const Login = () => {
 						path: '/',
 						maxAge: 60 * 60 * 24 * 3,
 					})
-					dispatch({ type: 'LOGIN', payload: res.data.user.email })
-					history.push('/home')
+					dispatch({ type: 'LOGIN', payload: res.data.user })
+					history.push('/')
 				}
 			})
 			.catch((err) => console.log(err))

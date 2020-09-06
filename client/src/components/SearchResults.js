@@ -2,15 +2,17 @@ import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import axios from 'axios'
 import Cookies from 'universal-cookie'
+import { Link } from 'react-router-dom'
 
 const cookies = new Cookies()
 
 const SearchResults = ({ history }) => {
 	const [users, setUsers] = useState([])
-	const openProfile = (id) => {
-		const userId = id.slice(1, id.length)
-		history.push({ pathname: '/profile/' + userId })
-	}
+	// const openProfile = (id) => {
+	// 	const userId = id.slice(1, id.length)
+	// 	console.log(userId)
+	// 	history.push({ pathname: '/profile/' + userId })
+	// }
 	useEffect(() => {
 		axios({
 			url: '/search_users',
@@ -29,10 +31,10 @@ const SearchResults = ({ history }) => {
 			<div className="search-results">
 				{users ? (
 					users.map((user) => (
-						<div
-							onClick={(e) => openProfile(e.target.id)}
+						<Link
 							key={user._id}
 							id={'u' + user._id}
+							to={'/profile/' + user._id}
 							className="search-result"
 						>
 							<img src={user.image} />
@@ -40,7 +42,7 @@ const SearchResults = ({ history }) => {
 								<h1>{user.fullName}</h1>
 								<h2>Lives in {user.country}</h2>
 							</div>
-						</div>
+						</Link>
 					))
 				) : (
 					<h1>No Results</h1>

@@ -1,9 +1,9 @@
-import React, { useState, createContext, useReducer, useEffect } from 'react'
+import React, { createContext, useReducer, useEffect } from 'react'
 import {
 	BrowserRouter as Router,
 	Route,
-	useHistory,
 	withRouter,
+	Switch,
 } from 'react-router-dom'
 
 import Home from './components/Home'
@@ -22,7 +22,7 @@ const cookies = new Cookies()
 export const AuthContext = createContext()
 const initState = {
 	authenticated: false,
-	user: null,
+	user: {},
 }
 const AuthReducer = (state, action) => {
 	switch (action.type) {
@@ -34,7 +34,7 @@ const AuthReducer = (state, action) => {
 		case 'LOGOUT':
 			return {
 				authenticated: false,
-				user: null,
+				user: {},
 			}
 		default:
 			return state
@@ -49,24 +49,25 @@ function App(props) {
 			method: 'GET',
 			headers: { authorization: `Bearer ${cookies.get('jwt')}` },
 		}).then((res) => {
-			if (res.data.userEmail) {
-				dispatch({ type: 'LOGIN', payload: res.data.userEmail })
-				props.history.push('/home')
-			} else {
-				dispatch({ type: 'LOGOUT', payload: null })
+			if (!res.data.user) {
+				dispatch({ type: 'LOGOUT', payload: {} })
 				props.history.push('/login')
+			} else {
+				dispatch({ type: 'LOGIN', payload: res.data.user })
+				console.log(res.data.user)
 			}
 		})
 	}, [])
 	return (
 		<Router>
 			<AuthContext.Provider value={{ state, dispatch }}>
-				<ProtectedRoute exact path="/home" component={Home} />
-				<ProtectedRoute exact path="/profile" component={Profile} />
-				<ProtectedRoute exact path="/search" component={SearchResults} />
-				{/* <ProtectedRoute exact path="/profile/:id" component={Profile} /> */}
-				<Route exact path="/signup" component={Signup} />
-				<Route exact path="/login" component={Login} />
+				<Switch>
+					<ProtectedRoute exact path="/search" component={SearchResults} />
+					<ProtectedRoute exact path="/profile/:id" component={Profile} />
+					<Route exact path="/signup" component={Signup} />
+					<Route exact path="/login" component={Login} />
+					<ProtectedRoute exact path="/" component={Home} />
+				</Switch>
 			</AuthContext.Provider>
 		</Router>
 	)

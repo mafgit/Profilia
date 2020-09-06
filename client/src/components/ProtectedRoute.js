@@ -5,7 +5,7 @@ import Cookies from 'universal-cookie'
 const cookies = new Cookies()
 const ProtectedRoute = ({ component: Component, ...rest }) => {
 	const { state, dispatch } = useContext(AuthContext)
-	return cookies.get('jwt') && state.authenticated === true ? (
+	return cookies.get('jwt') ? (
 		<Route {...rest} component={Component} />
 	) : (
 		<Redirect to={{ pathname: '/login' }} />

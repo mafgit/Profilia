@@ -29,7 +29,7 @@ const PostForm = ({ modal, setModal }) => {
 								authorization: `Bearer ${cookies.get('jwt')}`,
 							},
 						}).then((res) => {
-							console.log(res)
+							setModal(false)
 						})
 					}
 				}}

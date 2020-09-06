@@ -17,7 +17,7 @@ const Signup = () => {
 	const { state, dispatch } = useContext(AuthContext)
 	useEffect(() => {
 		if (state.authenticated) {
-			history.push('/home')
+			history.push('/')
 		}
 	}, [state])
 	return (
@@ -70,9 +70,9 @@ const Signup = () => {
 												})
 												dispatch({
 													type: 'LOGIN',
-													payload: res.data.user.email,
+													payload: res.data.user,
 												})
-												history.push('/home')
+												history.push('/')
 											}
 										})
 										.catch((err) => {

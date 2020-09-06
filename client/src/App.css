@@ -21,6 +21,17 @@ body {
 	line-height: 1.4;
 }
 
+body::-webkit-scrollbar {
+	width: 10px;
+}
+body::-webkit-scrollbar-thumb {
+	border-radius: 30px;
+	background-color: #0e0e0e;
+}
+body::-webkit-scrollbar-track {
+	background-color: var(--dark-dark);
+}
+
 ul {
 	list-style-type: none;
 }
@@ -48,6 +59,9 @@ ul {
 	justify-content: center;
 	align-items: center;
 	display: flex;
+}
+.search-btn:hover {
+	background-color: var(--dark-darkest);
 }
 .navbar-search {
 	display: flex;
@@ -172,10 +186,10 @@ button {
 }
 
 .navbar-pic {
-	width: 40px;
-	margin-left: 10px;
+	object-fit: cover;
+	width: 90%;
 	border-radius: 5px;
-	height: 40px;
+	height: 90%;
 }
 
 .top-follow-details span {
@@ -391,7 +405,7 @@ form .btn-div {
 	min-width: 300px;
 	color: #fff;
 	border-radius: 10px;
-	padding: 10px;
+	padding: 20px 10px;
 	align-items: center;
 }
 
@@ -411,4 +425,11 @@ form .btn-div {
 
 .search-result .result-details h2 {
 	font-size: 16px;
+}
+.loading-profile {
+	color: #fff;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50px, 0);
 }

@@ -54,7 +54,11 @@ module.exports = {
 											(err, token) => {
 												return res.json({
 													token,
-													user: { email: user.email, _id: user._id },
+													user: {
+														email: user.email,
+														_id: user._id,
+														image: user.image,
+													},
 												})
 											}
 										)
@@ -80,7 +84,11 @@ module.exports = {
 								(err, token) => {
 									return res.json({
 										token,
-										user: { email: user.email, _id: user._id },
+										user: {
+											email: user.email,
+											_id: user._id,
+											image: user.image,
+										},
 									})
 								}
 							)
@@ -97,14 +105,10 @@ module.exports = {
 		}
 	},
 	check_auth: (req, res) => {
-		res.json({ userEmail: req.userEmail })
+		User.findById(req.userId, (err, user) => {
+			res.json({
+				user: { email: user.email, _id: user._id, image: user.image },
+			})
+		})
 	},
 }
-
-// updating followers
-// User.updateOne(
-//   { _id: '5f4abb6b2d303d2c24458add' },
-//   { $addToSet: { followers: 'ObjectID' } }
-// ).then((user) => {
-//   res.json({ user })
-// })

@@ -25,7 +25,7 @@ const Post = ({ post }) => {
 		}
 		axios({
 			method: 'POST',
-			url: '/post_post_likes',
+			url: '/change_post_like',
 			data: {
 				postId: postId.slice(1, postId.length),
 				type,
@@ -53,13 +53,15 @@ const Post = ({ post }) => {
 					className="post-profile-pic"
 					src="https://images.unsplash.com/photo-1598405151786-c7a7824b81cf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1402&q=80"
 				/>
-				<h2>{details.author}</h2>
+				<h2>{details.authorName}</h2>
 			</div>
 			<p>{details.body}</p>
 			<div className="post-likes-comments">
 				<div
 					className={
-						details.likes.includes(state.user) ? 'post-like liked' : 'post-like'
+						details.likes.includes(state.user.email)
+							? 'post-like liked'
+							: 'post-like'
 					}
 					onClick={(e) => handleLike(e)}
 				>

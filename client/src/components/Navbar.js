@@ -1,11 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import PostForm from './PostForm'
+import { AuthContext } from '../App'
 
 const Navbar = () => {
 	const [modal, setModal] = useState(false)
 	const [search, setSearch] = useState('')
 	const history = useHistory()
+	const { state } = useContext(AuthContext)
+	const toSearchPage = () => {
+		if (search.trim().length) {
+			history.push({ pathname: '/search', state: { search } })
+		}
+	}
 	return (
 		<div className="navbar">
 			<div>
@@ -14,27 +21,26 @@ const Navbar = () => {
 			<nav>
 				<ul>
 					<div className="navbar-search">
-						<input type="text" onChange={(e) => setSearch(e.target.value)} />
+						<input
+							type="text"
+							onKeyUp={(e) => {
+								if (e.which === 13) return toSearchPage()
+							}}
+							onChange={(e) => setSearch(e.target.value)}
+						/>
 						<button
 							className="search-btn fa fa-search"
-							onClick={() => {
-								if (search) {
-									history.push({ pathname: '/search', state: { search } })
-								}
-							}}
+							onClick={toSearchPage}
 						></button>
 					</div>
 					<Link to="#" onClick={() => setModal(true)}>
 						<i className="fa fa-plus"></i>
 					</Link>
-					<Link to="/home">
+					<Link to="/">
 						<i className="fa fa-home"></i>
 					</Link>
-					<Link to="/profile">
-						<img
-							className="navbar-pic"
-							src="https://images.unsplash.com/photo-1598405151786-c7a7824b81cf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1402&q=80"
-						/>
+					<Link to={'/profile/' + state.user._id}>
+						<img className="navbar-pic" src={state.user.image} />
 					</Link>
 				</ul>
 			</nav>

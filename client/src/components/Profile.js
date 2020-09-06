@@ -6,7 +6,8 @@ import axios from 'axios'
 import Cookies from 'universal-cookie'
 import Followers from './Followers.js'
 import Following from './Following.js'
-const Profile = ({ match }) => {
+import { Link } from 'react-router-dom'
+const Profile = ({ match, history }) => {
 	const cookies = new Cookies()
 	const { state, dispatch } = useContext(AuthContext)
 	const [profileInfo, setProfileInfo] = useState({})
@@ -14,7 +15,7 @@ const Profile = ({ match }) => {
 	useEffect(() => {
 		axios({
 			method: 'POST',
-			url: '/profile',
+			url: '/get_profile',
 			data: { id: match.params.id },
 			headers: { Authorization: `Bearer ${cookies.get('jwt')}` },
 		}).then((res) => {
@@ -104,7 +105,10 @@ const Profile = ({ match }) => {
 									''
 								)}
 								{state.user._id === profileInfo._id ? (
-									<button className="edit-profile-btn">
+									<button
+										onClick={() => history.push('/editprofile')}
+										className="edit-profile-btn"
+									>
 										<i className="fa fa-edit"></i> Edit Profile
 									</button>
 								) : (

@@ -3,7 +3,7 @@ const Post = require('../models/Post')
 const ObjectId = require('mongoose').Types.ObjectId
 module.exports = {
 	get_profile: (req, res) => {
-		User.findById(req.body.id, (err, user) => {
+		User.findById(ObjectId(req.body.id), (err, user) => {
 			res.json({ user })
 		})
 	},
@@ -94,7 +94,7 @@ module.exports = {
 	},
 	get_home: (req, res) => {
 		User.findById(req.userId).then((user) => {
-			Post.find({ _id: { $in: user.followers } }).then((posts) => {
+			Post.find({ author: { $in: user.following } }).then((posts) => {
 				return res.json({ posts })
 			})
 		})

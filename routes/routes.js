@@ -22,7 +22,7 @@ router.post('/search_users', verifyToken, search_users)
 router.get('/check_auth', verifyToken, check_auth)
 
 router.get('/get_home', verifyToken, get_home)
-router.post('/profile', verifyToken, get_profile)
+router.post('/get_profile', verifyToken, get_profile)
 router.post('/get_posts', verifyToken, get_posts)
 router.get('/get_follow/:follow/:id', verifyToken, get_follow)
 

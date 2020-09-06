@@ -16,6 +16,7 @@ import SearchResults from './components/SearchResults'
 import './App.css'
 import axios from 'axios'
 import Cookies from 'universal-cookie'
+import EditProfile from './components/EditProfile'
 
 const cookies = new Cookies()
 
@@ -64,6 +65,7 @@ function App(props) {
 				<Switch>
 					<ProtectedRoute exact path="/search" component={SearchResults} />
 					<ProtectedRoute exact path="/profile/:id" component={Profile} />
+					<ProtectedRoute exact path="/editprofile" component={EditProfile} />
 					<Route exact path="/signup" component={Signup} />
 					<Route exact path="/login" component={Login} />
 					<ProtectedRoute exact path="/" component={Home} />

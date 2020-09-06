@@ -134,7 +134,8 @@ a {
 	height: 20px;
 }
 
-button {
+button,
+a {
 	border: none;
 	cursor: pointer;
 	outline: none;
@@ -432,4 +433,44 @@ form .btn-div {
 	left: 50%;
 	top: 50%;
 	transform: translate(-50px, 0);
+}
+.welcome {
+	color: #fff;
+	margin: 30px 0;
+	text-align: center;
+}
+
+.edit-profile form {
+	display: flex;
+	color: #fff;
+	margin: 30px auto;
+	width: 70%;
+	flex-direction: column;
+}
+.edit-profile form input,
+.edit-profile form textarea {
+	padding: 15px;
+	background-color: var(--dark-darkest);
+	color: #fff;
+	margin: 10px 0;
+}
+.edit-profile form textarea {
+	min-height: 200px;
+}
+
+.edit-profile label {
+	font-size: 18px;
+}
+
+.edit-profile form .btns {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.edit-profile form .btns button {
+	width: 49%;
+	padding: 12px;
+}
+.discard-btn {
+	background-color: #ff2b2b;
 }

@@ -2,475 +2,604 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
 :root {
-	--dark-light: #dddddd;
-	--dark-darkest: #1c1c1c;
-	--dark-dark: #3a3a3a;
-	--dark-font: #fff;
+  --dark-light: #dddddd;
+  --dark-darkest: #1c1c1c;
+  --dark-dark: #3a3a3a;
+  --dark-font: #fff;
 }
 
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 body {
-	background-color: var(--dark-dark);
-	font-size: 15px;
-	font-family: 'Comfortaa', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
-		sans-serif;
-	line-height: 1.4;
+  background-color: var(--dark-dark);
+  font-size: 15px;
+  font-family: 'Comfortaa', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+    sans-serif;
+  line-height: 1.4;
 }
 
 body::-webkit-scrollbar {
-	width: 10px;
+  width: 10px;
 }
 body::-webkit-scrollbar-thumb {
-	border-radius: 30px;
-	background-color: #0e0e0e;
+  border-radius: 30px;
+  background-color: #0e0e0e;
 }
 body::-webkit-scrollbar-track {
-	background-color: var(--dark-dark);
+  background-color: var(--dark-dark);
 }
 
 ul {
-	list-style-type: none;
+  list-style-type: none;
 }
 .navbar {
-	display: flex;
-	justify-content: space-between;
-	background-color: var(--dark-darkest);
-	padding: 30px 50px;
-	color: var(--dark-font);
-	align-items: center;
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--dark-darkest);
+  padding: 30px 50px;
+  color: var(--dark-font);
+  align-items: center;
 }
 
 .navbar nav ul {
-	display: flex;
-	align-items: flex-start;
+  display: flex;
+  align-items: flex-start;
 }
 
 .navbar nav ul a,
 .search-btn {
-	background-color: var(--dark-dark);
-	width: 40px;
-	height: 40px;
-	color: #fff;
-	border-radius: 5px;
-	justify-content: center;
-	align-items: center;
-	display: flex;
+  background-color: var(--dark-dark);
+  width: 40px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  transition: 0.3s;
 }
 .search-btn:hover {
-	background-color: var(--dark-darkest);
+  transition: 0.3s;
+  background-color: var(--dark-darkest);
 }
 .navbar-search {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
 }
 .navbar nav ul a {
-	margin-left: 10px;
+  margin-left: 10px;
 }
 .navbar-search button {
-	border-radius: 0 5px 5px 0;
+  border-radius: 0 5px 5px 0;
 }
 .navbar-search input {
-	border-radius: 5px 0 0 5px;
-	color: #fff;
-	width: 200px;
-	transition: 0.3s;
-	background-color: var(--dark-dark);
+  border-radius: 5px 0 0 5px;
+  color: #fff;
+  width: 200px;
+  transition: 0.3s;
+  background-color: var(--dark-dark);
 }
 .navbar-search input:focus {
-	width: 250px;
-	transition: 0.3s;
+  width: 250px;
+  transition: 0.3s;
 }
 a {
-	color: var(--dark-font);
-	text-decoration: none;
+  color: var(--dark-font);
+  text-decoration: none;
 }
 
 .top-section {
-	background-color: var(--dark-darkest);
-	padding: 50px 40px 100px 40px;
-	display: flex;
+  background-color: var(--dark-darkest);
+  padding: 50px 40px 100px 40px;
+  display: flex;
 }
 
 .profilia-logo {
-	text-transform: uppercase;
-	font-family: 'Kalam', cursive;
+  text-transform: uppercase;
+  font-family: 'Kalam', cursive;
 }
 
 .profile-pic {
-	width: 200px;
-	height: 200px;
-	object-fit: cover;
-	border-radius: 100px;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 100px;
 }
 
 .top-details {
-	margin: 0 40px;
-	color: var(--dark-font);
-	display: flex;
-	align-items: flex-start;
-	justify-content: flex-start;
-	flex-direction: column;
+  margin: 0 40px;
+  color: var(--dark-font);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  line-height: 1.6;
 }
 
 .top-details q {
-	line-height: 1.3;
-	margin: 10px 0;
-	max-width: 800px;
-	font-size: 16px;
+  line-height: 1.3;
+  margin: 10px 0;
+  max-width: 800px;
+  font-size: 16px;
 }
 .top-follow-details {
-	line-height: 1.5;
-	margin-top: 10px;
+  line-height: 1.5;
+  margin-top: 10px;
 }
 .top-follow-details i {
-	width: 20px;
-	text-align: center;
-	height: 20px;
+  width: 20px;
+  text-align: center;
+  height: 20px;
 }
 
 button,
-a {
-	border: none;
-	cursor: pointer;
-	outline: none;
-	border-radius: 10px;
+a,
+select {
+  border: none;
+  cursor: pointer;
+  outline: none;
+  transition: 0.3s;
+  border-radius: 10px;
 }
-
+button:hover,
+a:hover,
+select:hover {
+  filter: brightness(85%);
+  transition: 0.3s;
+}
+option {
+  background-color: #1c1c1c;
+  color: var(--dark-font);
+}
+select {
+  -webkit-appearance: none;
+  border-radius: 10px;
+  font-size: 20px;
+  padding: 10px;
+}
 .edit-profile-btn,
 .follow-profile-btn,
 .unfollow-profile-btn {
-	background-color: #087afd;
-	padding: 12px;
-	font-size: 20px;
-	margin: 20px 10px 0px 0;
-	color: var(--dark-font);
+  background-color: #087afd;
+  padding: 12px;
+  font-size: 20px;
+  margin: 20px 10px 0px 0;
+  color: var(--dark-font);
 }
 .follow-profile-btn {
-	background-color: #ff3c3c;
+  background-color: #ff3c3c;
 }
 .unfollow-profile-btn {
-	background-color: #fff;
-	color: #ff3c3c;
+  background-color: #fff;
+  color: #ff3c3c;
 }
 .profile-nav {
-	display: flex;
-	justify-content: space-evenly;
-	background-color: var(--dark-darkest);
-	margin: 20px auto;
-	border-radius: 10px;
-	width: 70%;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: var(--dark-darkest);
+  margin: 20px auto;
+  border-radius: 10px;
+  width: 70%;
+  align-items: center;
 }
 .profile-nav li {
-	cursor: pointer;
-	padding: 20px;
-	color: var(--dark-font);
-	text-align: center;
-	width: 100%;
-	border-radius: 10px;
-	height: 100%;
+  cursor: pointer;
+  padding: 20px;
+  color: var(--dark-font);
+  text-align: center;
+  width: 100%;
+  border-radius: 10px;
+  height: 100%;
+  transition: 0.3s;
 }
 .profile-nav li:hover {
-	background-color: rgb(95, 95, 95);
+  transition: 0.3s;
+
+  background-color: rgb(95, 95, 95);
 }
 .profile-nav .active {
-	background-color: var(--dark-light);
-	color: #000;
+  background-color: var(--dark-light);
+  color: #000;
+  transition: 0.3s;
 }
 .profile-nav .active:hover {
-	background-color: var(--dark-light);
+  transition: 0.3s;
+
+  background-color: var(--dark-light);
 }
 
 .navbar-pic {
-	object-fit: cover;
-	width: 90%;
-	border-radius: 5px;
-	height: 90%;
+  object-fit: cover;
+  width: 90%;
+  border-radius: 5px;
+  height: 90%;
 }
 
 .top-follow-details span {
-	font-size: 17px;
+  font-size: 17px;
 }
 .post {
-	width: 70%;
-	border-radius: 10px;
-	padding: 20px;
-	margin: 40px auto;
-	background-color: #1c1c1c;
-	color: #fff;
+  width: 70%;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 40px auto;
+  background-color: #1c1c1c;
+  color: #fff;
+}
+i {
+  pointer-events: none;
 }
 
 .post-profile-pic {
-	width: 50px;
-	height: 50px;
-	border-radius: 10px;
-	margin-right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  margin-right: 20px;
 }
 .post-author-details {
-	margin: 0 0 20px 0;
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
+}
+
+.post-upper {
+  align-items: center;
+  justify-items: center;
+  display: flex;
+  margin: 0 0 20px 0;
+}
+.post-options {
+  align-items: center;
+  justify-items: center;
+  display: flex;
+  margin-left: auto;
+}
+.post-options-btn {
+  background: none;
+  margin-left: 20px;
+  font-size: 20px;
+  color: var(--dark-light);
 }
 
 .post-likes-comments {
-	display: flex;
-	justify-content: center;
-	margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.post-likes-comments i {
+  margin: 0 5px;
 }
 
 .post-likes-comments div {
-	width: 100%;
-	text-align: center;
-	height: 100%;
-	padding: 10px;
+  width: 100%;
+  text-align: center;
+  height: 100%;
+  padding: 10px;
 }
 
 .post-like {
-	background-color: #ff3c3c;
-	border-radius: 10px 0 0 10px;
+  background-color: #ff3c3c;
+  border-radius: 10px 0 0 10px;
+  cursor: pointer;
+  transition: 0.3s;
 }
-
+.post-like:hover {
+  background-color: #ff2121;
+  transition: 0.3s;
+}
+.post-comments:hover {
+  background-color: #0872fd;
+  transition: 0.3s;
+}
 .post-comments {
-	background-color: #087afd;
-	border-radius: 0 10px 10px 0;
+  transition: 0.3s;
+  background-color: #0084ff;
+  border-radius: 0 10px 10px 0;
+  cursor: pointer;
 }
 
 .login,
 .signup {
-	background-image: url('./img/bg.jpeg');
-	background-size: cover;
-	background-position: center;
-	justify-content: center;
-	align-items: center;
-	display: flex;
-	color: #fff;
-	height: 100vh;
-	display: flex;
+  background-image: url('./img/bg.jpeg');
+  background-size: cover;
+  background-position: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  color: #fff;
+  height: 100vh;
+  display: flex;
 }
 
 .login {
-	flex-direction: column;
+  flex-direction: column;
 }
 .login form,
 .signup form {
-	margin: 10px auto;
-	background-color: #1c1c1c;
-	padding: 40px;
-	color: #fff;
-	border-radius: 10px;
-	width: 350px;
+  margin: 10px auto;
+  background-color: #1c1c1c;
+  padding: 40px;
+  color: #fff;
+  border-radius: 10px;
+  width: 350px;
 }
-form div {
-	display: flex;
-	margin: 12px 0;
-	flex-direction: column;
+.form div {
+  display: flex;
+  margin: 12px 0;
+  flex-direction: column;
 }
 input,
 textarea {
-	border-radius: 10px;
-	outline: none;
-	font-family: inherit;
-	border: none;
-	padding: 10px;
-	font-size: 18px;
+  border-radius: 10px;
+  outline: none;
+  font-family: inherit;
+  border: none;
+  padding: 10px;
+  font-size: 18px;
 }
 
-form div * {
-	margin: 3px 0;
+.form div * {
+  margin: 3px 0;
 }
 
-form button {
-	background-color: #087afd;
-	font-size: 20px;
-	padding: 10px;
-	color: #fff;
+.form button {
+  background-color: #087afd;
+  font-size: 20px;
+  padding: 10px;
+  color: #fff;
 }
 
-form .btn-div {
-	text-align: center;
-	margin: 20px 0;
+.form .btn-div {
+  text-align: center;
+  margin: 20px 0;
 }
 
 .signup-intro {
-	background-color: #1c1c1c;
-	padding: 40px;
-	color: #fff;
-	line-height: 2;
-	margin: auto;
-	border-radius: 10px;
-	font-size: 17px;
-	width: 60%;
+  background-color: #1c1c1c;
+  padding: 40px;
+  color: #fff;
+  line-height: 2;
+  margin: auto;
+  border-radius: 10px;
+  font-size: 17px;
+  width: 60%;
+}
+.signup h4 {
+  font-size: 20px;
 }
 
 .follower {
-	width: 350px;
-	height: 100px;
-	background-color: var(--dark-darkest);
-	color: var(--dark-font);
-	display: flex;
-	margin: 10px auto;
-	border-radius: 10px;
-	padding: 10px 15px;
-	align-items: center;
+  min-width: 350px;
+  max-width: 400px;
+  height: 100px;
+  background-color: var(--dark-darkest);
+  color: var(--dark-font);
+  display: flex;
+  margin: 10px auto;
+  border-radius: 10px;
+  padding: 10px 15px;
+  align-items: center;
 }
 
 .follower a {
-	align-items: center;
-	display: flex;
+  align-items: center;
+  display: flex;
 }
 
 .follower-details {
-	font-size: 13px;
-	justify-content: center;
-	display: flex;
-	align-items: flex-start;
-	margin: 0 20px;
-	flex-direction: column;
+  font-size: 13px;
+  justify-content: center;
+  display: flex;
+  align-items: flex-start;
+  margin: 0 20px;
+  flex-direction: column;
 }
 
 .follower img {
-	width: 60px;
-	height: 60px;
-	object-fit: cover;
-	border-radius: 10px;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
 .followers {
-	grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 .modal-wrap {
-	background-color: rgba(0, 0, 0, 0.794);
-	position: fixed;
-	top: 0;
-	width: 100vw;
-	height: 100vh;
-	left: 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  background-color: rgba(0, 0, 0, 0.794);
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .postform {
-	display: flex;
-	flex-direction: column;
-	width: 60%;
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  justify-content: center;
+}
+.postform .btns {
+  display: flex;
+  flex-direction: row;
+}
+.postform .btns button {
+  width: 100%;
+  margin: 0 5px;
 }
 .postform textarea {
-	background-color: var(--dark-darkest);
-	color: #fff;
-	margin-bottom: 20px;
-	min-height: 200px;
-	height: 200px;
-	min-width: 100%;
-	max-width: 100%;
-	overflow: hidden;
+  background-color: var(--dark-darkest);
+  color: #fff;
+  margin-bottom: 20px;
+  min-height: 300px;
+  height: 200px;
+  min-width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 .liked {
-	background-color: var(--dark-light);
-	color: #ff2b2b;
+  background-color: var(--dark-light);
+  color: #ff3c3c;
+  font-weight: bold;
+}
+.liked:hover {
+  background-color: #fff;
 }
 
 .unfollow-btn {
-	width: 40px;
-	background-color: var(--dark-dark);
-	height: 40px;
-	border-radius: 5px;
-	font-size: 30px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-left: auto;
-	color: #fff;
+  width: 40px;
+  background-color: var(--dark-dark);
+  height: 40px;
+  border-radius: 5px;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  color: #fff;
 }
 .loading-h3 {
-	text-align: center;
-	color: #fff;
-	margin: auto;
-	margin-bottom: 20px;
+  text-align: center;
+  color: #fff;
+  margin: auto;
+  margin-bottom: 20px;
 }
 
 .search-results {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 .search-result {
-	background-color: var(--dark-darkest);
-	margin: 20px auto;
-	cursor: pointer;
-	display: flex;
-	min-width: 300px;
-	color: #fff;
-	border-radius: 10px;
-	padding: 20px 10px;
-	align-items: center;
+  background-color: var(--dark-darkest);
+  margin: 20px auto;
+  cursor: pointer;
+  display: flex;
+  min-width: 300px;
+  color: #fff;
+  border-radius: 10px;
+  padding: 20px 10px;
+  align-items: center;
 }
 
 .search-result img {
-	width: 50px;
-	height: 50px;
-	border-radius: 5px;
-	object-fit: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  object-fit: cover;
 }
 .search-result .result-details {
-	margin: 0 20px;
+  margin: 0 20px;
 }
 
 .search-result .result-details h1 {
-	font-size: 22px;
+  font-size: 22px;
 }
 
 .search-result .result-details h2 {
-	font-size: 16px;
+  font-size: 16px;
 }
 .loading-profile {
-	color: #fff;
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50px, 0);
+  color: #fff;
+  position: absolute;
+  margin: auto;
+  width: 100vw;
+  text-align: center;
+  top: 50%;
 }
 .welcome {
-	color: #fff;
-	margin: 30px 0;
-	text-align: center;
+  color: #fff;
+  margin: 30px 0;
+  text-align: center;
+}
+.edit-profile {
+  margin: 60px 0;
 }
 
-.edit-profile form {
-	display: flex;
-	color: #fff;
-	margin: 30px auto;
-	width: 70%;
-	flex-direction: column;
+.edit-profile .form {
+  display: flex;
+  color: #fff;
+  margin: 30px auto;
+  width: 70%;
+  flex-direction: column;
 }
-.edit-profile form input,
-.edit-profile form textarea {
-	padding: 15px;
-	background-color: var(--dark-darkest);
-	color: #fff;
-	margin: 10px 0;
+.edit-profile .form input,
+.edit-profile .form textarea,
+.edit-profile .form select {
+  padding: 15px;
+  background-color: var(--dark-darkest);
+  color: #fff;
+  margin: 15px 0;
 }
-.edit-profile form textarea {
-	min-height: 200px;
+.edit-profile .form textarea {
+  min-height: 200px;
 }
 
 .edit-profile label {
-	font-size: 18px;
+  font-size: 18px;
 }
 
-.edit-profile form .btns {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
+.edit-profile .form .btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
-.edit-profile form .btns button {
-	width: 49%;
-	padding: 12px;
+.edit-profile .form .btns button {
+  width: 49%;
+  padding: 12px;
 }
-.discard-btn {
-	background-color: #ff2b2b;
+.form .discard-btn {
+  background-color: #ff3c3c;
+}
+.flag {
+  width: 30px;
+  border-radius: 3px;
+  object-fit: cover;
+  margin-right: 5px;
+}
+
+.edit-nav {
+  width: 40%;
+}
+
+.post-options button {
+  background: none;
+  color: #fff;
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+.delete-modal {
+  background-color: var(--dark-darkest);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  padding: 20px;
+  padding: 40px;
+  border-radius: 10px;
+}
+.delete-modal h3 {
+  font-size: 20px;
+  margin: 20px 0;
+}
+.delete-modal button {
+  background-color: var(--dark-dark);
+  color: #fff;
+  font-size: 20px;
+  padding: 10px;
+  width: 100%;
+  margin: 0 5px;
+}
+.delete-modal div {
+  margin: 20px 0;
+  width: 100%;
+  display: flex;
 }

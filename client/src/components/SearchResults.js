@@ -6,50 +6,42 @@ import { Link } from 'react-router-dom'
 
 const cookies = new Cookies()
 
-const SearchResults = ({ history }) => {
-	const [users, setUsers] = useState([])
-	// const openProfile = (id) => {
-	// 	const userId = id.slice(1, id.length)
-	// 	console.log(userId)
-	// 	history.push({ pathname: '/profile/' + userId })
-	// }
-	useEffect(() => {
-		axios({
-			url: '/search_users',
-			data: {
-				search: history.location.state.search,
-			},
-			headers: { authorization: `Bearer ${cookies.get('jwt')}` },
-			method: 'POST',
-		}).then((res) => {
-			setUsers(res.data.users)
-		})
-	}, [history.location.state.search])
-	return (
-		<>
-			<Navbar />
-			<div className="search-results">
-				{users ? (
-					users.map((user) => (
-						<Link
-							key={user._id}
-							id={'u' + user._id}
-							to={'/profile/' + user._id}
-							className="search-result"
-						>
-							<img src={user.image} />
-							<div className="result-details">
-								<h1>{user.fullName}</h1>
-								<h2>Lives in {user.country}</h2>
-							</div>
-						</Link>
-					))
-				) : (
-					<h1>No Results</h1>
-				)}
-			</div>
-		</>
-	)
+const SearchResults = (props) => {
+  const [users, setUsers] = useState([])
+  useEffect(() => {
+    axios({
+      url: '/search_users/' + props.match.params.query.replace(' ', '+'),
+      headers: { authorization: `Bearer ${cookies.get('jwt')}` },
+      method: 'GET',
+    }).then((res) => {
+      setUsers(res.data.users)
+    })
+  }, [props.match.params.query])
+  return (
+    <>
+      <Navbar />
+      <div className="search-results">
+        {users[0] ? (
+          users.map((user) => (
+            <Link
+              key={user._id}
+              id={'u' + user._id}
+              to={'/profile/' + user._id}
+              className="search-result"
+            >
+              <img src={user.image} />
+              <div className="result-details">
+                <h1>{user.fullName}</h1>
+                <h2>Lives in {user.country}</h2>
+              </div>
+            </Link>
+          ))
+        ) : (
+          <h1 className="loading-profile">No Results</h1>
+        )}
+      </div>
+    </>
+  )
 }
 
 export default SearchResults

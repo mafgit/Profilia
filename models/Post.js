@@ -1,12 +1,9 @@
 const mongoose = require('mongoose')
 
 const postSchema = new mongoose.Schema({
-  body: { type: String, required: true },
-  author: { type: mongoose.Types.ObjectId, required: true },
-  authorName: { type: String, required: true },
-  authorImage: { type: String, required: true },
-  likes: { type: Array, required: true },
-  comments: { type: Array, required: true },
+	body: { type: String, required: true },
+	author: { type: mongoose.Types.ObjectId, ref: 'User', required: true },
+	likes: { type: Array, required: true },
 })
 
 // {

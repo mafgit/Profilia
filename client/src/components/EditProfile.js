@@ -182,15 +182,21 @@ const EditProfile = (props) => {
                   props.history.push(`/profile/${state.user._id}`)
                 }}
               >
-                Discard Changes
+                &times;
               </button>
               {tab === 'Details' ? (
-                <button className="save-btn" onClick={(e) => updateDetails(e)}>
-                  Save Changes
+                <button
+                  className="save-btn green-btn"
+                  onClick={(e) => updateDetails(e)}
+                >
+                  <i className="fa fa-save"></i>
                 </button>
               ) : (
-                <button className="save-btn" onClick={(e) => updatePw(e)}>
-                  Save Password
+                <button
+                  className="save-btn green-btn"
+                  onClick={(e) => updatePw(e)}
+                >
+                  <i className="fa fa-save"></i>
                 </button>
               )}
             </div>

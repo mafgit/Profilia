@@ -6,20 +6,25 @@ import axios from 'axios'
 import Cookies from 'universal-cookie'
 import Followers from './Followers.js'
 import Following from './Following.js'
+import { Redirect } from 'react-router-dom'
 
 const Profile = ({ match, history }) => {
   const cookies = new Cookies()
   const { state } = useContext(AuthContext)
   const [profileInfo, setProfileInfo] = useState({})
   const [flag, setFlag] = useState('')
+  const [loading, setLoading] = useState(true)
   const [tab, setTab] = useState('Posts')
   useEffect(() => {
+    setLoading(true)
+    setTab('Posts')
     axios({
       method: 'POST',
       url: '/get_profile',
       data: { id: match.params.id },
       headers: { Authorization: `Bearer ${cookies.get('jwt')}` },
     }).then((res) => {
+      setLoading(false)
       const { user } = res.data
       const {
         _id,
@@ -72,13 +77,13 @@ const Profile = ({ match, history }) => {
   return (
     <>
       <Navbar />
-      {profileInfo._id ? (
+      {profileInfo._id && !loading ? (
         <div className="profile">
           <div className="top-section">
             <img className="profile-pic" src={profileInfo.image} />
 
             <div className="top-details">
-              <h1>{profileInfo.fullName}</h1>
+              <h1 className="fullName">{profileInfo.fullName}</h1>
               <h3
                 style={{
                   display: 'flex',

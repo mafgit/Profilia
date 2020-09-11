@@ -17,6 +17,7 @@ const Navbar = () => {
     <div className="navbar">
       <div>
         <h1 className="profilia-logo">Profilia</h1>
+        <h1 className="profilia-logo mobile-logo">P</h1>
       </div>
       <nav>
         <ul>

@@ -47,9 +47,8 @@ ul {
   display: flex;
   align-items: flex-start;
 }
-
-.navbar nav ul a,
-.search-btn {
+.navbar nav ul .ul-a,
+.search-btn1 {
   background-color: var(--dark-dark);
   width: 40px;
   height: 40px;
@@ -60,7 +59,7 @@ ul {
   display: flex;
   transition: 0.3s;
 }
-.search-btn:hover {
+.search-btn1:hover {
   transition: 0.3s;
   background-color: var(--dark-darkest);
 }
@@ -70,7 +69,7 @@ ul {
   align-items: center;
   margin-left: 10px;
 }
-.navbar nav ul a {
+.navbar nav ul .ul-a {
   margin-left: 10px;
 }
 .navbar-search button {
@@ -82,10 +81,6 @@ ul {
   width: 200px;
   transition: 0.3s;
   background-color: var(--dark-dark);
-}
-.navbar-search input:focus {
-  width: 250px;
-  transition: 0.3s;
 }
 a {
   color: var(--dark-font);
@@ -515,6 +510,10 @@ textarea {
   text-align: center;
   color: #fff;
   margin: auto;
+  background-color: #1c1c1c;
+  padding: 30px;
+  width: 70%;
+  border-radius: 10px;
   margin-bottom: 20px;
 }
 
@@ -528,7 +527,7 @@ textarea {
   margin: 10px auto;
   cursor: pointer;
   display: flex;
-  min-width: 300px;
+  width: 330px;
   color: #fff;
   border-radius: 10px;
   padding: 20px 10px;
@@ -751,22 +750,102 @@ textarea::placeholder {
 .error,
 .success {
   background-color: #ff2121;
+  text-align: center;
   padding: 10px;
   font-size: 20px;
+  color: #fff;
   border-radius: 5px;
-  margin: auto 10px;
+  margin: 10px 0;
 }
 .success {
   background-color: #03aa64;
 }
-
-.errors,
-.successes {
-  position: absolute;
-  top: 35px;
+.profilia-signup {
+  display: none;
+}
+@keyframes alertAnim {
+  0% {
+    opacity: 0;
+    top: 0;
+  }
+  30% {
+    top: 80px;
+    opacity: 1;
+  }
+  70% {
+    top: 80px;
+    opacity: 1;
+  }
+  100% {
+    top: 0px;
+    opacity: 0;
+  }
 }
 .mobile-logo {
   display: none;
+}
+
+.navbar nav ul .search-btn2 {
+  display: none;
+}
+
+.alerts {
+  left: 0;
+  top: 35px;
+  position: fixed;
+  width: 100%;
+  z-index: 5;
+  pointer-events: none;
+}
+.error,
+.success {
+  animation: 4s alertAnim;
+  text-align: center;
+  margin: auto;
+  margin-bottom: 10px;
+  width: fit-content;
+}
+.search-search-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+}
+.search-search-div button {
+  height: 50px;
+  width: 50px;
+  border-radius: 0 10px 10px 0;
+}
+.search-search {
+  background-color: #1c1c1c;
+  color: #fff;
+  border-radius: 10px 0 0 10px;
+  font-size: 20px;
+  height: 50px;
+  width: 60%;
+}
+.navbar-modal {
+  position: absolute;
+  right: 40px;
+  top: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.navbar-modal button,
+.navbar-modal a {
+  text-align: center;
+  margin: 0;
+  padding: 10px;
+  width: 100%;
+  background-color: var(--dark-light);
+  color: #000;
+  border-radius: 5px 5px 0 0;
+  font-size: 18px;
+}
+.navbar-modal button {
+  border-radius: 0 0 5px 5px;
 }
 @media (max-width: 1300px) {
   .followers {
@@ -834,6 +913,9 @@ textarea::placeholder {
   .signup-intro {
     display: none;
   }
+  .profilia-signup {
+    display: block;
+  }
   .postform {
     width: 75%;
   }
@@ -851,26 +933,31 @@ textarea::placeholder {
   .navbar-search input {
     width: 150px;
   }
-  .navbar-search input:focus {
-    width: 200px;
-  }
-  .navbar .profilia-logo {
-    display: block;
-    font-size: 18px;
-  }
-  .navbar .profilia-logo::first-letter {
-    font-size: 30px;
+  .profilia-logo {
+    font-size: 25px;
   }
   .navbar .mobile-logo {
     display: none;
   }
 }
-@media (max-width: 513px) {
+@media (max-width: 600px) {
+  .navbar .search-btn2.ul-a {
+    display: flex;
+  }
+  .navbar-modal {
+    right: 20px;
+  }
   .navbar {
     padding: 20px;
   }
-  .navbar input {
-    width: 80px;
+  .navbar .navbar-search {
+    display: none;
+  }
+  .navbar .search-btn2 {
+    display: flex;
+  }
+  .search-result {
+    width: 90%;
   }
 }
 @media (max-width: 350px) {
@@ -880,10 +967,9 @@ textarea::placeholder {
   .navbar {
     padding: 10px;
   }
-  .navbar-search input:focus {
-    width: 150px;
-  }
-  .navbar .profilia-logo {
+}
+@media (max-width: 330px) {
+  .profilia-logo {
     display: none;
   }
   .navbar .mobile-logo {

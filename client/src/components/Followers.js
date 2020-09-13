@@ -8,15 +8,19 @@ const Followers = ({ profileId }) => {
   const cookies = new Cookies()
   const [followers, setFollowers] = useState([])
   useEffect(() => {
+    let mounted = true
     setLoading(true)
     axios({
       url: `/get_follow/followers/${profileId}`,
       headers: { authorization: `Bearer ${cookies.get('jwt')}` },
       method: 'GET',
     }).then((res) => {
-      setFollowers(res.data.result)
-      setLoading(false)
+      if (mounted) {
+        setFollowers(res.data.result)
+        setLoading(false)
+      }
     })
+    return () => (mounted = false)
   }, [profileId])
 
   return !loading && followers[0] ? (

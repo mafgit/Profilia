@@ -19,31 +19,18 @@ import './App.css'
 import axios from 'axios'
 import Cookies from 'universal-cookie'
 
-const cookies = new Cookies()
+import { AuthReducer, initState, AuthContext } from './AuthContext'
+import Alert from './components/Alert'
 
-export const AuthContext = createContext()
-const initState = {
-  authenticated: false,
-  user: {},
-}
-const AuthReducer = (state, action) => {
-  switch (action.type) {
-    case 'LOGIN':
-      return {
-        authenticated: true,
-        user: action.payload,
-      }
-    case 'LOGOUT':
-      return {
-        authenticated: false,
-        user: {},
-      }
-    default:
-      return state
-  }
+const alertInitState = []
+export const AlertContext = createContext()
+const alertReducer = (state, action) => {
+  return [...state, { type: action.type, payload: action.payload }]
 }
 
 function App(props) {
+  const cookies = new Cookies()
+  const [alertState, alertDispatch] = useReducer(alertReducer, alertInitState)
   const [state, dispatch] = useReducer(AuthReducer, initState)
   useEffect(() => {
     if (cookies.get('jwt')) {
@@ -54,32 +41,48 @@ function App(props) {
       }).then((res) => {
         if (!res.data.user) {
           dispatch({ type: 'LOGOUT', payload: {} })
+          props.history.push('/login')
         } else {
+          alertDispatch({
+            type: 'success',
+            payload: 'Logged in as ' + res.data.user.email,
+          })
           dispatch({ type: 'LOGIN', payload: res.data.user })
         }
       })
     } else {
       dispatch({ type: 'LOGOUT', payload: {} })
+      props.history.push('/login')
     }
   }, [])
   return (
-    <Router>
-      <AuthContext.Provider value={{ state, dispatch }}>
-        <Switch>
-          <ProtectedRoute
-            exact
-            path="/search/:query"
-            component={SearchResults}
-          />
-          <ProtectedRoute exact path="/profile/:id" component={Profile} />
-          <ProtectedRoute exact path="/editprofile" component={EditProfile} />
-          <ProtectedRoute exact path="/" component={Home} />
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/login" component={Login} />
-          <ProtectedRoute path="*" component={Error404} />
-        </Switch>
-      </AuthContext.Provider>
-    </Router>
+    <>
+      <Router>
+        <AuthContext.Provider value={{ state, dispatch }}>
+          <AlertContext.Provider value={{ alertState, alertDispatch }}>
+            <Alert alerts={alertState} />
+            <Switch>
+              <ProtectedRoute
+                exact
+                path="/search/:query"
+                component={SearchResults}
+              />
+              <ProtectedRoute exact path="/search" component={SearchResults} />
+              <ProtectedRoute exact path="/profile/:id" component={Profile} />
+              <ProtectedRoute
+                exact
+                path="/editprofile"
+                component={EditProfile}
+              />
+              <ProtectedRoute exact path="/" component={Home} />
+              <Route exact path="/signup" component={Signup} />
+              <Route exact path="/login" component={Login} />
+              <ProtectedRoute path="*" component={Error404} />
+            </Switch>
+          </AlertContext.Provider>
+        </AuthContext.Provider>
+      </Router>
+    </>
   )
 }
 

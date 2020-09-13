@@ -9,18 +9,21 @@ const Following = ({ profileId, profileInfo, setProfileInfo, myId }) => {
   const [following, setFollowing] = useState([])
 
   useEffect(() => {
+    let mounted = true
     setLoading(true)
     axios({
       url: `/get_follow/following/${profileId}`,
       headers: { authorization: `Bearer ${cookies.get('jwt')}` },
       method: 'GET',
     }).then((res) => {
-      setFollowing(res.data.result)
-      setLoading(false)
+      if (mounted) {
+        setFollowing(res.data.result)
+        setLoading(false)
+      }
     })
+    return () => (mounted = false)
   }, [profileId])
-
-  return !loading && following ? (
+  return !loading && following[0] ? (
     <div className="followers">
       {following.map((following) => (
         <div className="follower" id={'u' + following._id} key={following._id}>

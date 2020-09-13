@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react'
 import Navbar from './Navbar'
 import axios from 'axios'
-import { AuthContext } from '../App'
+import { AuthContext } from '../AuthContext'
 import Cookies from 'universal-cookie'
+import { AlertContext } from '../App'
 
 const EditProfile = (props) => {
   const cookies = new Cookies()
@@ -19,6 +20,8 @@ const EditProfile = (props) => {
   const [bio, setBio] = useState('')
   const [country, setCountry] = useState('')
 
+  const { alertDispatch } = useContext(AlertContext)
+
   const changeTab = (clickedTab) => {
     document.querySelector('.active').classList.remove('active')
     clickedTab.className = 'active'
@@ -26,58 +29,60 @@ const EditProfile = (props) => {
   }
 
   const updateDetails = () => {
-    const errors = []
     if (!fullName) {
-      errors.push('Fullname must not be empty')
-    }
-    if (!country) {
-      errors.push('Please select a country')
-    }
-    if (errors[0]) {
-      // notify
-      console.log(errors)
-      return errors
-    } else {
-      axios({
-        url: '/update_details',
-        data: { fullName, bio, country },
-        method: 'PATCH',
-        headers: { Authorization: `Bearer ${cookies.get('jwt')}` },
-      }).then((res) => {
-        console.log(res.data)
+      return alertDispatch({
+        type: 'error',
+        payload: 'Fullname must not be empty',
       })
     }
+    if (!country) {
+      return alertDispatch({
+        type: 'error',
+        payload: 'Please select a country',
+      })
+    }
+    axios({
+      url: '/update_details',
+      data: { fullName, bio, country },
+      method: 'PATCH',
+      headers: { Authorization: `Bearer ${cookies.get('jwt')}` },
+    }).then(() => {
+      alertDispatch({ type: 'success', payload: 'Details Updated' })
+    })
   }
 
   const updatePw = () => {
-    const errors = []
     if (password2 !== password) {
-      errors.push('Passwords must match')
+      return alertDispatch({ type: 'error', payload: 'Passwords must match' })
     }
     if (
       oldPassword.length < 6 ||
       password2.length < 6 ||
       password2.length < 6
     ) {
-      errors.push('Passwords must be at least 6 characters long')
-    }
-    if (!oldPassword || !password2 || !password2) {
-      errors.push('You must fill all three fields')
-    }
-    if (errors[0]) {
-      // notify
-      console.log(errors)
-      return errors
-    } else {
-      axios({
-        url: 'update_pw',
-        data: { oldPassword, password, password2 },
-        method: 'PATCH',
-        headers: { Authorization: `Bearer ${cookies.get('jwt')}` },
-      }).then((res) => {
-        console.log(res.data)
+      return alertDispatch({
+        type: 'error',
+        payload: 'Passwords must be at least 6 characters long',
       })
     }
+    if (!oldPassword || !password2 || !password2) {
+      return alertDispatch({
+        type: 'error',
+        payload: 'You must fill all three fields',
+      })
+    }
+    axios({
+      url: 'update_pw',
+      data: { oldPassword, password, password2 },
+      method: 'PATCH',
+      headers: { Authorization: `Bearer ${cookies.get('jwt')}` },
+    }).then((res) => {
+      console.log(res.data)
+      if (res.data.error) {
+        return alertDispatch({ type: 'error', payload: res.data.error })
+      }
+      return alertDispatch({ type: 'success', payload: 'Password Updated' })
+    })
   }
   useEffect(() => {
     axios({
@@ -104,7 +109,6 @@ const EditProfile = (props) => {
       setCountries(res.data.map((country) => country.name))
     })
   }, [])
-  const validate = (e) => {}
   return (
     <>
       <Navbar />

@@ -8,6 +8,7 @@ const Posts = ({ user }) => {
   const cookies = new Cookies()
   const [posts, setPosts] = useState([{}])
   useEffect(() => {
+    let mounted = true
     axios({
       url: '/get_posts',
       method: 'POST',
@@ -16,9 +17,12 @@ const Posts = ({ user }) => {
       },
       headers: { Authorization: `Bearer ${cookies.get('jwt')}` },
     }).then((res) => {
-      setPosts(res.data.posts)
-      setLoading(false)
+      if (mounted) {
+        setPosts(res.data.posts)
+        setLoading(false)
+      }
     })
+    return () => (mounted = false)
   }, [user])
   return (
     <div className="profile-posts">

@@ -6,7 +6,10 @@ const ObjectId = require('mongoose').Types.ObjectId
 module.exports = {
   get_profile: (req, res) => {
     User.findById(req.body.id, '-password', (err, user) => {
-      res.json({ user })
+      if (!user) {
+        return res.json({ error: 'User not found' })
+      }
+      return res.json({ user })
     })
   },
   get_posts: (req, res) => {
@@ -147,9 +150,11 @@ module.exports = {
             $set: { body: req.body.body },
           },
           { new: true }
-        ).then((post) => {
-          res.json({ success: 'Post Updated Successfully', post })
-        })
+        )
+          .populate('author', 'image fullName _id')
+          .exec((err, post) => {
+            res.json({ success: 'Post Updated Successfully', post })
+          })
       }
     })
   },

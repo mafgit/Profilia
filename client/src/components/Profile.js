@@ -1,12 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { AuthContext } from '../App.js'
+import { AuthContext } from '../AuthContext'
 import Posts from './Posts'
 import Navbar from './Navbar'
 import axios from 'axios'
 import Cookies from 'universal-cookie'
 import Followers from './Followers.js'
 import Following from './Following.js'
-import { Redirect } from 'react-router-dom'
 
 const Profile = ({ match, history }) => {
   const cookies = new Cookies()
@@ -24,34 +23,38 @@ const Profile = ({ match, history }) => {
       data: { id: match.params.id },
       headers: { Authorization: `Bearer ${cookies.get('jwt')}` },
     }).then((res) => {
-      setLoading(false)
-      const { user } = res.data
-      const {
-        _id,
-        bio,
-        fullName,
-        country,
-        followers,
-        following,
-        image,
-        email,
-      } = user
+      if (!res.data.error) {
+        setLoading(false)
+        const { user } = res.data
+        const {
+          _id,
+          bio,
+          fullName,
+          country,
+          followers,
+          following,
+          image,
+          email,
+        } = user
 
-      axios
-        .get(`https://restcountries.eu/rest/v2/name/${country}?fullText=true`)
-        .then((res) => {
-          setFlag(res.data[0].flag)
+        axios
+          .get(`https://restcountries.eu/rest/v2/name/${country}?fullText=true`)
+          .then((res) => {
+            setFlag(res.data[0].flag)
+          })
+        setProfileInfo({
+          _id,
+          bio,
+          fullName,
+          country,
+          followers,
+          following,
+          image,
+          email,
         })
-      setProfileInfo({
-        _id,
-        bio,
-        fullName,
-        country,
-        followers,
-        following,
-        image,
-        email,
-      })
+      } else {
+        history.push('/404')
+      }
     })
   }, [match.params.id])
   const changeFollow = (type) => {

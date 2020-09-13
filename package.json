@@ -1,24 +1,31 @@
 {
-	"name": "profilia",
-	"version": "1.0.0",
-	"description": "",
-	"main": "app.js",
-	"scripts": {
-		"start": "node app.js",
-		"server": "nodemon app.js",
-		"client": "cd client && npm start",
-		"dev": "concurrently \"npm run server\" \"npm run client\""
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"dependencies": {
-		"bcrypt": "^5.0.0",
-		"concurrently": "^5.3.0",
-		"cors": "^2.8.5",
-		"dotenv": "^8.2.0",
-		"express": "^4.17.1",
-		"jsonwebtoken": "^8.5.1",
-		"mongoose": "^5.10.2"
-	}
+  "name": "profilia",
+  "version": "1.0.0",
+  "description": "A Simple Social Media Web App",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "server": "nodemon app.js",
+    "client": "cd client && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "cd client && npm run build",
+    "install-client": "cd client && npm install",
+    "heroku-postbuild": "npm run install-client && npm run build"
+  },
+  "keywords": [
+    "social media",
+    "social",
+    "media"
+  ],
+  "author": "maf",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "concurrently": "^5.3.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.2"
+  }
 }

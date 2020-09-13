@@ -1,17 +1,20 @@
 import React, { useContext, useState, useEffect } from 'react'
 import Cookies from 'universal-cookie'
 import axios from 'axios'
-import { AuthContext } from '../App'
+import { AuthContext } from '../AuthContext'
 import { Link } from 'react-router-dom'
 import Comments from './Comments'
-const cookies = new Cookies()
+import { AlertContext } from '../App'
+
 const Post = ({ post }) => {
+  const { alertDispatch } = useContext(AlertContext)
   const [deleteModal, setDeleteModal] = useState(false)
   const [edited, setEdited] = useState('')
   const [editModal, setEditModal] = useState(false)
   const [comments, setComments] = useState(false)
   const [details, setDetails] = useState({})
   const { state } = useContext(AuthContext)
+  const cookies = new Cookies()
 
   function checkModal(e) {
     if (e.target.className === 'modal-wrap') {
@@ -130,8 +133,9 @@ const Post = ({ post }) => {
                   method: 'DELETE',
                   url: '/delete_post',
                   headers: { authorization: `Bearer ${cookies.get('jwt')}` },
-                }).then((res) => {
+                }).then(() => {
                   setDetails({})
+                  alertDispatch({ type: 'success', payload: 'Post Deleted' })
                   setDeleteModal(false)
                 })
               }}
@@ -167,6 +171,7 @@ const Post = ({ post }) => {
                     url: '/update_post',
                     headers: { authorization: `Bearer ${cookies.get('jwt')}` },
                   }).then((res) => {
+                    alertDispatch({ type: 'success', payload: 'Post Updated' })
                     setDetails(res.data.post)
                     setEditModal(false)
                   })

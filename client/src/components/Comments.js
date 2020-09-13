@@ -82,9 +82,7 @@ const Comments = ({ postId }) => {
                           authorId: comment.author._id,
                           postId,
                         },
-                      }).then((res) => {
-                        console.log(res.data)
-                      })
+                      }).then((res) => {})
                     }}
                   >
                     <i className="fa fa-trash"></i>

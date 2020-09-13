@@ -2,7 +2,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
 :root {
-  --dark-light: #dddddd;
+  --dark-light: #f1f1f1;
   --dark-darkest: #1c1c1c;
   --dark-dark: #3a3a3a;
   --dark-font: #fff;
@@ -232,6 +232,10 @@ select {
   margin: 40px auto;
   background-color: #1c1c1c;
   color: #fff;
+}
+.post .body {
+  font-size: 16px;
+  line-height: 1.6;
 }
 i,
 .post-likes-comments span {
@@ -487,7 +491,7 @@ textarea {
 }
 .liked {
   background-color: var(--dark-light);
-  color: #ff3c3c;
+  color: #ff0000;
   font-weight: bold;
 }
 .liked:hover {
@@ -506,13 +510,20 @@ textarea {
   margin-left: auto;
   color: #fff;
 }
+.country-div {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+}
 .loading-h3 {
   text-align: center;
   color: #fff;
   margin: auto;
   background-color: #1c1c1c;
   padding: 30px;
-  width: 70%;
+  width: fit-content;
   border-radius: 10px;
   margin-bottom: 20px;
 }
@@ -858,6 +869,10 @@ textarea::placeholder {
   }
 }
 @media (max-width: 773px) {
+  .country-div {
+    justify-content: center;
+    text-align: center;
+  }
   .followers {
     grid-template-columns: 1fr;
   }
@@ -958,6 +973,12 @@ textarea::placeholder {
   }
   .search-result {
     width: 90%;
+  }
+  .search-search-div {
+    width: 90%;
+  }
+  .search-search {
+    width: 100%;
   }
 }
 @media (max-width: 350px) {

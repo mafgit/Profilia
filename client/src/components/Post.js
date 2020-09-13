@@ -45,7 +45,6 @@ const Post = ({ post }) => {
         authorization: `Bearer ${cookies.get('jwt')}`,
       },
     }).then((res) => {
-      console.log(res.data.post)
       setDetails(res.data.post)
     })
   }
@@ -85,7 +84,7 @@ const Post = ({ post }) => {
           )}
         </div>
       </div>
-      <p>{details.body}</p>
+      <p className="body">{details.body}</p>
       <div className="post-likes-comments">
         <div
           className={
@@ -120,7 +119,6 @@ const Post = ({ post }) => {
               style={{ backgroundColor: '#0084ff' }}
               onClick={() => {
                 setDeleteModal(false)
-                console.log('x')
               }}
             >
               No

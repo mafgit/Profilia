@@ -87,13 +87,7 @@ const Profile = ({ match, history }) => {
 
             <div className="top-details">
               <h1 className="fullName">{profileInfo.fullName}</h1>
-              <h3
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
+              <h3 className="country-div">
                 {flag ? <img className="flag" src={flag} /> : ''}
                 {profileInfo.country}
               </h3>

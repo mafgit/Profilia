@@ -29,7 +29,6 @@ const SearchResults = (props) => {
         setUsers(res.data.users)
         setLoading(false)
       })
-      console.log(users)
     }
   }, [props.match.params.query])
   return (
@@ -38,6 +37,7 @@ const SearchResults = (props) => {
       <div className="search-search-div">
         <input
           className="search-search"
+          placeholder="Type a name ..."
           onKeyUp={(e) => {
             if (e.key === 'Enter') return toSearchPage()
           }}

@@ -77,7 +77,6 @@ const EditProfile = (props) => {
       method: 'PATCH',
       headers: { Authorization: `Bearer ${cookies.get('jwt')}` },
     }).then((res) => {
-      console.log(res.data)
       if (res.data.error) {
         return alertDispatch({ type: 'error', payload: res.data.error })
       }

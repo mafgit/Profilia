@@ -39,8 +39,10 @@ function App(props) {
         method: 'GET',
         headers: { authorization: `Bearer ${cookies.get('jwt')}` },
       }).then((res) => {
-        if (!res.data.user) {
+        if (res.data.error) {
           dispatch({ type: 'LOGOUT', payload: {} })
+          console.log('yeah')
+          cookies.remove('jwt')
           props.history.push('/login')
         } else {
           alertDispatch({

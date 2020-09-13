@@ -3,7 +3,9 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const path = require('path')
 
-require('dotenv').config()
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
 const app = express()
 app.use(cors())

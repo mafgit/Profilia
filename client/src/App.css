@@ -929,6 +929,9 @@ textarea::placeholder {
   .login form input {
     margin: 5px 0;
   }
+  .home .welcome {
+    margin: 20px;
+  }
 }
 
 @media (max-width: 1000px) {

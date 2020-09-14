@@ -42,7 +42,7 @@ function App(props) {
         if (res.data.error) {
           dispatch({ type: 'LOGOUT', payload: {} })
           console.log('yeah')
-          cookies.remove('jwt')
+          cookies.remove('jwt', { path: '/' })
           props.history.push('/login')
         } else {
           alertDispatch({

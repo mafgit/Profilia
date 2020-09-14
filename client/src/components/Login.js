@@ -26,13 +26,12 @@ const Login = (props) => {
           if (res.data.token) {
             cookies.set('jwt', res.data.token, {
               path: '/',
-              maxAge: 60 * 60 * 24 * 3,
             })
             dispatch({ type: 'LOGIN', payload: res.data.user })
             props.history.push('/')
             alertDispatch({
               type: 'success',
-              payload: 'Logged in as ' + state.user.email,
+              payload: 'Logged in as ' + res.data.user.email,
             })
           } else {
             alertDispatch({ type: 'error', payload: 'Invalid Credentials' })

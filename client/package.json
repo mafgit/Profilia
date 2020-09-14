@@ -34,5 +34,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://profilia.herokuapp.com/"
+  "proxy": "http:127.0.0.1:5000"
 }

@@ -14,7 +14,7 @@ const Login = (props) => {
     e.preventDefault()
     if (password && email) {
       axios({
-        url: 'http://localhost:5000/login',
+        url: '/login',
         method: 'POST',
         headers: {
           'content-type': 'application/json',

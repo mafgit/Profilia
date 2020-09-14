@@ -863,6 +863,12 @@ textarea::placeholder {
     grid-template-columns: 1fr 1fr;
   }
 }
+@media (max-width: 1200px) {
+  .post,
+  .profile-nav {
+    width: 80%;
+  }
+}
 @media (max-width: 960px) {
   .followers {
     width: 100%;
@@ -924,6 +930,7 @@ textarea::placeholder {
     margin: 5px 0;
   }
 }
+
 @media (max-width: 1000px) {
   .signup-intro {
     display: none;

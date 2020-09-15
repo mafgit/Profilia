@@ -13,9 +13,6 @@ module.exports = {
     })
   },
   get_posts: (req, res) => {
-    // Post.find({ author: ObjectId(req.body.id) }, (err, posts) => {
-    // 	res.json({ posts })
-    // })
     Post.find({ author: ObjectId(req.body.id) })
       .populate('author', 'image fullName _id')
       .exec((err, posts) => {
@@ -75,6 +72,7 @@ module.exports = {
       .then((users) => res.json({ users }))
       .catch((err) => console.log(err))
   },
+
   change_follow: (req, res) => {
     const id = ObjectId(req.params.id)
     const { type } = req.params

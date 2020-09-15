@@ -62,9 +62,15 @@ const PostForm = ({ modal, setModal }) => {
               &times;
             </button>
             {/* <label className="image-label" htmlFor="add-image-btn">
-						<i className="fa fa-image"></i>
-					</label> */}
-            {/* <input type="file" id="add-image-btn" /> */}
+              <i className="fa fa-image"></i>
+            </label>
+            <input
+              type="file"
+              id="add-image-btn"
+              onChange={(e) => {
+                console.log(e.target.files)
+              }}
+            /> */}
             <button className="create-post-btn green-btn">+</button>
           </div>
         </form>

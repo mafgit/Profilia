@@ -64,13 +64,9 @@ function App(props) {
           <AlertContext.Provider value={{ alertState, alertDispatch }}>
             <Alert alerts={alertState} />
             <Switch>
-              <ProtectedRoute
-                exact
-                path="/search/:query"
-                component={SearchResults}
-              />
               <ProtectedRoute exact path="/search" component={SearchResults} />
-              <ProtectedRoute exact path="/profile/:id" component={Profile} />
+              <ProtectedRoute path="/search/:query" component={SearchResults} />
+              <ProtectedRoute path="/profile/:id" component={Profile} />
               <ProtectedRoute
                 exact
                 path="/editprofile"

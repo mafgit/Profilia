@@ -134,24 +134,24 @@ img {
 
 button,
 a,
-select {
-  /* .image-label { */
+select,
+.image-label {
   border: none;
   cursor: pointer;
   outline: none;
   transition: 0.3s;
   border-radius: 10px;
 }
-/* .image-label {
+.image-label {
   background-color: #0084ff;
   display: flex;
   justify-content: center;
   align-items: center;
-} */
+}
 button:hover,
 a:hover,
-select:hover {
-  /* .image-label:hover { */
+select:hover,
+.image-label:hover {
   filter: brightness(85%);
   transition: 0.3s;
 }
@@ -463,8 +463,8 @@ textarea {
 .postform textarea {
   resize: none;
 }
-.postform .btns button {
-  /* .image-label { */
+.postform .btns button,
+.image-label {
   min-width: 50px;
   min-height: 50px;
   height: 50px;

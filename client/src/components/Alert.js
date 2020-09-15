@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
 
 const Alert = ({ alerts }) => {
+  let timeout
   useEffect(() => {
-    setTimeout(() => {
+    timeout = setTimeout(() => {
       document.querySelector('.alerts').innerHTML = ''
-      clearTimeout()
+      clearTimeout(timeout)
     }, 4000)
   }, [alerts])
   return (

@@ -2,12 +2,12 @@ import React, { useState, useContext, useEffect } from 'react'
 import { Link, useHistory, withRouter } from 'react-router-dom'
 import PostForm from './PostForm'
 import { AuthContext } from '../AuthContext'
-import Cookies from 'universal-cookie'
+import cookies from 'js-cookie'
 import { AlertContext } from '../App'
 
 const Navbar = (props) => {
   const [modal, setModal] = useState(false)
-  const cookies = new Cookies()
+
   const [search, setSearch] = useState('')
   const [opened, setOpened] = useState(false)
   const [navbarModal, setNavbarModal] = useState(false)

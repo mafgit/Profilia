@@ -17,7 +17,7 @@ import EditProfile from './components/EditProfile'
 
 import './App.css'
 import axios from 'axios'
-import Cookies from 'universal-cookie'
+import cookies from 'js-cookie'
 
 import { AuthReducer, initState, AuthContext } from './AuthContext'
 import Alert from './components/Alert'
@@ -29,22 +29,21 @@ const alertReducer = (state, action) => {
 }
 
 function App(props) {
-  const cookies = new Cookies()
   const [alertState, alertDispatch] = useReducer(alertReducer, alertInitState)
   const [state, dispatch] = useReducer(AuthReducer, initState)
   useEffect(() => {
-    if (cookies.get('jwt', { doNotParse: true })) {
+    if (cookies.get('jwt')) {
       axios({
         url: '/check_auth',
         method: 'GET',
         headers: {
-          authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
+          authorization: `Bearer ${cookies.get('jwt')}`,
         },
       }).then((res) => {
         if (res.data.error) {
           dispatch({ type: 'LOGOUT', payload: {} })
           console.log('yeah')
-          cookies.remove('jwt', { path: '/' })
+          cookies.remove('jwt', { path: '' })
           props.history.push('/login')
         } else {
           alertDispatch({

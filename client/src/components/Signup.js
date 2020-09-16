@@ -1,12 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import axios from 'axios'
-import Cookies from 'universal-cookie'
+import cookies from 'js-cookie'
 import { AuthContext } from '../AuthContext'
 import { AlertContext } from '../App'
 
 const Signup = (props) => {
-  const cookies = new Cookies()
   const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
   const [countries, setCountries] = useState([])
   const [fullName, setFullName] = useState('')
@@ -78,9 +77,9 @@ const Signup = (props) => {
                       }
                       if (res.data.token) {
                         cookies.set('jwt', res.data.token, {
-                          path: '/',
-                          sameSite: true,
-                          httpOnly: true,
+                          path: '',
+                          expires: 7,
+                          sameSite: 'strict',
                         })
                         dispatch({
                           type: 'LOGIN',

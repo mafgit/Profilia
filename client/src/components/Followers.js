@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import Cookies from 'universal-cookie'
+import cookies from 'js-cookie'
 
 const Followers = ({ profileId }) => {
   const [loading, setLoading] = useState(true)
-  const cookies = new Cookies()
+
   const [followers, setFollowers] = useState([])
   useEffect(() => {
     let mounted = true
@@ -13,7 +13,7 @@ const Followers = ({ profileId }) => {
     axios({
       url: `/get_follow/followers/${profileId}`,
       headers: {
-        authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
+        authorization: `Bearer ${cookies.get('jwt')}`,
       },
       method: 'GET',
     }).then((res) => {

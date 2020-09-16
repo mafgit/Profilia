@@ -3,12 +3,11 @@ import { AuthContext } from '../AuthContext'
 import Posts from './Posts'
 import Navbar from './Navbar'
 import axios from 'axios'
-import Cookies from 'universal-cookie'
+import cookies from 'js-cookie'
 import Followers from './Followers.js'
 import Following from './Following.js'
 
 const Profile = ({ match, history }) => {
-  const cookies = new Cookies()
   const { state } = useContext(AuthContext)
   const [profileInfo, setProfileInfo] = useState({})
   const [flag, setFlag] = useState('')
@@ -22,7 +21,7 @@ const Profile = ({ match, history }) => {
       url: '/get_profile',
       data: { id: match.params.id },
       headers: {
-        authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
+        authorization: `Bearer ${cookies.get('jwt')}`,
       },
     }).then((res) => {
       if (!res.data.error) {
@@ -64,7 +63,7 @@ const Profile = ({ match, history }) => {
       method: 'GET',
       url: `/${type}/${profileInfo._id}`,
       headers: {
-        authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
+        authorization: `Bearer ${cookies.get('jwt')}`,
       },
     }).then((res) => {
       if (res.data.followers) {

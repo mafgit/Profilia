@@ -2,11 +2,10 @@ import React, { useState, useEffect, useContext } from 'react'
 import Navbar from './Navbar'
 import axios from 'axios'
 import { AuthContext } from '../AuthContext'
-import Cookies from 'universal-cookie'
+import cookies from 'js-cookie'
 import { AlertContext } from '../App'
 
 const EditProfile = (props) => {
-  const cookies = new Cookies()
   const [countries, setCountries] = useState([])
   const { state } = useContext(AuthContext)
   const [profileInfo, setProfileInfo] = useState({})
@@ -46,7 +45,7 @@ const EditProfile = (props) => {
       data: { fullName, bio, country },
       method: 'PATCH',
       headers: {
-        authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
+        authorization: `Bearer ${cookies.get('jwt')}`,
       },
     }).then(() => {
       alertDispatch({ type: 'success', payload: 'Details Updated' })
@@ -78,7 +77,7 @@ const EditProfile = (props) => {
       data: { oldPassword, password, password2 },
       method: 'PATCH',
       headers: {
-        authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
+        authorization: `Bearer ${cookies.get('jwt')}`,
       },
     }).then((res) => {
       if (res.data.error) {
@@ -95,7 +94,7 @@ const EditProfile = (props) => {
         id: state.user._id,
       },
       headers: {
-        authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
+        authorization: `Bearer ${cookies.get('jwt')}`,
       },
     }).then((res) => {
       setProfileInfo(res.data.user)

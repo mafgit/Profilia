@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { AuthContext } from '../AuthContext'
 import axios from 'axios'
-import Cookies from 'universal-cookie'
+import cookies from 'js-cookie'
 import { Link } from 'react-router-dom'
 
 const Comments = ({ postId }) => {
   const [comments, setComments] = useState([])
   const [body, setBody] = useState('')
   const { state } = useContext(AuthContext)
-  const cookies = new Cookies()
 
   useEffect(() => {
     axios({
@@ -16,7 +15,7 @@ const Comments = ({ postId }) => {
       data: { postId },
       method: 'POST',
       headers: {
-        authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
+        authorization: `Bearer ${cookies.get('jwt')}`,
       },
     }).then((res) => {
       setComments(res.data.comments)
@@ -39,9 +38,7 @@ const Comments = ({ postId }) => {
                 method: 'POST',
                 url: '/add_comment',
                 headers: {
-                  authorization: `Bearer ${cookies.get('jwt', {
-                    doNotParse: true,
-                  })}`,
+                  authorization: `Bearer ${cookies.get('jwt')}`,
                 },
                 data: {
                   postId,
@@ -77,9 +74,7 @@ const Comments = ({ postId }) => {
                         method: 'DELETE',
                         url: '/delete_comment',
                         headers: {
-                          authorization: `Bearer ${cookies.get('jwt', {
-                            doNotParse: true,
-                          })}`,
+                          authorization: `Bearer ${cookies.get('jwt')}`,
                         },
                         data: {
                           commentId: comment._id,

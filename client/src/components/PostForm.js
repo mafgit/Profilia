@@ -1,10 +1,9 @@
 import React, { useState, useContext } from 'react'
-import Cookies from 'universal-cookie'
+import cookies from 'js-cookie'
 import axios from 'axios'
 import { AlertContext } from '../App'
 
 const PostForm = ({ modal, setModal }) => {
-  const cookies = new Cookies()
   const { alertDispatch } = useContext(AlertContext)
   const [body, setBody] = useState('')
   function checkModal(e) {
@@ -29,9 +28,7 @@ const PostForm = ({ modal, setModal }) => {
                 method: 'POST',
                 data: { body },
                 headers: {
-                  authorization: `Bearer ${cookies.get('jwt', {
-                    doNotParse: true,
-                  })}`,
+                  authorization: `Bearer ${cookies.get('jwt')}`,
                 },
               }).then((res) => {
                 alertDispatch({

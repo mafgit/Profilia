@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import axios from 'axios'
-import Cookies from 'universal-cookie'
+import cookies from 'js-cookie'
 import Post from './Post'
 
 const Home = () => {
-  const cookies = new Cookies()
   const [posts, setPosts] = useState([{}])
   const [loading, setLoading] = useState(true)
   useEffect(() => {
@@ -13,7 +12,7 @@ const Home = () => {
       url: '/get_home',
       method: 'GET',
       headers: {
-        authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
+        authorization: `Bearer ${cookies.get('jwt')}`,
       },
     }).then((res) => {
       setPosts(res.data.posts)

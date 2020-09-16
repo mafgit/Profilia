@@ -1,12 +1,11 @@
 import React, { useState, useContext } from 'react'
 import axios from 'axios'
 import { Link, Redirect } from 'react-router-dom'
-import Cookies from 'universal-cookie'
+import cookies from 'js-cookie'
 import { AuthContext } from '../AuthContext'
 import { AlertContext } from '../App'
 
 const Login = (props) => {
-  const cookies = new Cookies()
   const { state, dispatch } = useContext(AuthContext)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -25,8 +24,9 @@ const Login = (props) => {
         .then((res) => {
           if (res.data.token) {
             cookies.set('jwt', res.data.token, {
-              path: '/',
-              sameSite: true,
+              path: '',
+              expires: 7,
+              sameSite: 'strict',
             })
             dispatch({ type: 'LOGIN', payload: res.data.user })
             alertDispatch({

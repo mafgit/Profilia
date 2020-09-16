@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import axios from 'axios'
-import Cookies from 'universal-cookie'
+import cookies from 'js-cookie'
 import { Link } from 'react-router-dom'
-
-const cookies = new Cookies()
 
 const SearchResults = (props) => {
   const [users, setUsers] = useState([])
@@ -24,7 +22,7 @@ const SearchResults = (props) => {
       axios({
         url: '/search_users/' + props.match.params.query.replace(' ', '+'),
         headers: {
-          authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
+          authorization: `Bearer ${cookies.get('jwt')}`,
         },
         method: 'GET',
       }).then((res) => {

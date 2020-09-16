@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import Post from './Post'
 import axios from 'axios'
-import Cookies from 'universal-cookie'
+import cookies from 'js-cookie'
 
 const Posts = ({ user }) => {
   const [loading, setLoading] = useState(true)
-  const cookies = new Cookies()
+
   const [posts, setPosts] = useState([{}])
   useEffect(() => {
     let mounted = true
@@ -16,7 +16,7 @@ const Posts = ({ user }) => {
         id: user,
       },
       headers: {
-        authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
+        authorization: `Bearer ${cookies.get('jwt')}`,
       },
     }).then((res) => {
       if (mounted) {

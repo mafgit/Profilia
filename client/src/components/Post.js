@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import Cookies from 'universal-cookie'
+import cookies from 'js-cookie'
 import axios from 'axios'
 import { AuthContext } from '../AuthContext'
 import { Link } from 'react-router-dom'
@@ -14,7 +14,6 @@ const Post = ({ post }) => {
   const [comments, setComments] = useState(false)
   const [details, setDetails] = useState({})
   const { state } = useContext(AuthContext)
-  const cookies = new Cookies()
 
   function checkModal(e) {
     if (e.target.className === 'modal-wrap') {
@@ -42,7 +41,7 @@ const Post = ({ post }) => {
         type,
       },
       headers: {
-        authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
+        authorization: `Bearer ${cookies.get('jwt')}`,
       },
     }).then((res) => {
       setDetails(res.data.post)
@@ -131,9 +130,7 @@ const Post = ({ post }) => {
                   method: 'DELETE',
                   url: '/delete_post',
                   headers: {
-                    authorization: `Bearer ${cookies.get('jwt', {
-                      doNotParse: true,
-                    })}`,
+                    authorization: `Bearer ${cookies.get('jwt')}`,
                   },
                 }).then(() => {
                   setDetails({})
@@ -172,9 +169,7 @@ const Post = ({ post }) => {
                     method: 'PATCH',
                     url: '/update_post',
                     headers: {
-                      authorization: `Bearer ${cookies.get('jwt', {
-                        doNotParse: true,
-                      })}`,
+                      authorization: `Bearer ${cookies.get('jwt')}`,
                     },
                   }).then((res) => {
                     alertDispatch({ type: 'success', payload: 'Post Updated' })

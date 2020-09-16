@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import Cookies from 'universal-cookie'
+import cookies from 'js-cookie'
 
 const Following = ({ profileId, profileInfo, setProfileInfo, myId }) => {
-  const cookies = new Cookies()
   const [loading, setLoading] = useState(true)
   const [following, setFollowing] = useState([])
 
@@ -14,7 +13,7 @@ const Following = ({ profileId, profileInfo, setProfileInfo, myId }) => {
     axios({
       url: `/get_follow/following/${profileId}`,
       headers: {
-        authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
+        authorization: `Bearer ${cookies.get('jwt')}`,
       },
       method: 'GET',
     }).then((res) => {
@@ -49,9 +48,7 @@ const Following = ({ profileId, profileInfo, setProfileInfo, myId }) => {
                   method: 'GET',
                   url: `/unfollow/${unfollowId}`,
                   headers: {
-                    authorization: `Bearer ${cookies.get('jwt', {
-                      doNotParse: true,
-                    })}`,
+                    authorization: `Bearer ${cookies.get('jwt')}`,
                   },
                 }).then((res) => {
                   // ...

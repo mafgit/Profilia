@@ -21,7 +21,9 @@ const Profile = ({ match, history }) => {
       method: 'POST',
       url: '/get_profile',
       data: { id: match.params.id },
-      headers: { Authorization: `Bearer ${cookies.get('jwt')}` },
+      headers: {
+        Authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
+      },
     }).then((res) => {
       if (!res.data.error) {
         setLoading(false)
@@ -61,7 +63,9 @@ const Profile = ({ match, history }) => {
     axios({
       method: 'GET',
       url: `/${type}/${profileInfo._id}`,
-      headers: { authorization: `Bearer ${cookies.get('jwt')}` },
+      headers: {
+        authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
+      },
     }).then((res) => {
       if (res.data.followers) {
         setProfileInfo({

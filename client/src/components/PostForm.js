@@ -29,7 +29,9 @@ const PostForm = ({ modal, setModal }) => {
                 method: 'POST',
                 data: { body },
                 headers: {
-                  authorization: `Bearer ${cookies.get('jwt')}`,
+                  authorization: `Bearer ${cookies.get('jwt', {
+                    doNotParse: true,
+                  })}`,
                 },
               }).then((res) => {
                 alertDispatch({

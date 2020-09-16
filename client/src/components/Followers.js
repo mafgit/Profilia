@@ -12,7 +12,9 @@ const Followers = ({ profileId }) => {
     setLoading(true)
     axios({
       url: `/get_follow/followers/${profileId}`,
-      headers: { authorization: `Bearer ${cookies.get('jwt')}` },
+      headers: {
+        authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
+      },
       method: 'GET',
     }).then((res) => {
       if (mounted) {
@@ -34,7 +36,10 @@ const Followers = ({ profileId }) => {
         >
           <img src={follower.image} />
           <div className="follower-details">
-            <h1>{follower.fullName}</h1>
+            <h1>
+              {follower.fullName.slice(0, 10)}
+              {follower.fullName.length > 10 ? '...' : ''}
+            </h1>
             <h3>{follower.country}</h3>
           </div>
         </Link>

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import axios from 'axios'
 import { Link, Redirect } from 'react-router-dom'
 import Cookies from 'universal-cookie'
@@ -6,6 +6,7 @@ import { AuthContext } from '../AuthContext'
 import { AlertContext } from '../App'
 
 const Login = (props) => {
+  const cookies = new Cookies()
   const { state, dispatch } = useContext(AuthContext)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -22,17 +23,13 @@ const Login = (props) => {
         data: { email, password },
       })
         .then((res) => {
-          const cookies = new Cookies()
           if (res.data.token) {
             cookies.set('jwt', res.data.token, {
               path: '/',
+              sameSite: true,
             })
             dispatch({ type: 'LOGIN', payload: res.data.user })
             props.history.push('/')
-            alertDispatch({
-              type: 'success',
-              payload: 'Logged in as ' + res.data.user.email,
-            })
           } else {
             alertDispatch({ type: 'error', payload: 'Invalid Credentials' })
           }

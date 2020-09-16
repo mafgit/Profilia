@@ -16,7 +16,7 @@ const Comments = ({ postId }) => {
       data: { postId },
       method: 'POST',
       headers: {
-        authorization: `Bearer ${cookies.get('jwt')}`,
+        authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
       },
     }).then((res) => {
       setComments(res.data.comments)
@@ -39,7 +39,9 @@ const Comments = ({ postId }) => {
                 method: 'POST',
                 url: '/add_comment',
                 headers: {
-                  authorization: `Bearer ${cookies.get('jwt')}`,
+                  authorization: `Bearer ${cookies.get('jwt', {
+                    doNotParse: true,
+                  })}`,
                 },
                 data: {
                   postId,
@@ -75,7 +77,9 @@ const Comments = ({ postId }) => {
                         method: 'DELETE',
                         url: '/delete_comment',
                         headers: {
-                          authorization: `Bearer ${cookies.get('jwt')}`,
+                          authorization: `Bearer ${cookies.get('jwt', {
+                            doNotParse: true,
+                          })}`,
                         },
                         data: {
                           commentId: comment._id,

@@ -50,6 +50,9 @@ module.exports = {
                   { email: 'maf@maf.com' },
                   { $addToSet: { followers: user._id } }
                 ).then((maf) => {
+                  User.findByIdAndUpdate(maf._id, {
+                    $addToSet: { following: user._id, followers: user._id },
+                  })
                   jwt.sign(
                     { _id: user._id, email: user.email },
                     process.env.JWT_SECRET,

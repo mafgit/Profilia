@@ -23,7 +23,9 @@ const SearchResults = (props) => {
       setLoading(true)
       axios({
         url: '/search_users/' + props.match.params.query.replace(' ', '+'),
-        headers: { authorization: `Bearer ${cookies.get('jwt')}` },
+        headers: {
+          authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
+        },
         method: 'GET',
       }).then((res) => {
         setUsers(res.data.users)

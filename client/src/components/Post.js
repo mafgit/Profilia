@@ -42,7 +42,7 @@ const Post = ({ post }) => {
         type,
       },
       headers: {
-        authorization: `Bearer ${cookies.get('jwt')}`,
+        authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
       },
     }).then((res) => {
       setDetails(res.data.post)
@@ -130,7 +130,11 @@ const Post = ({ post }) => {
                   data: { id: details._id },
                   method: 'DELETE',
                   url: '/delete_post',
-                  headers: { authorization: `Bearer ${cookies.get('jwt')}` },
+                  headers: {
+                    authorization: `Bearer ${cookies.get('jwt', {
+                      doNotParse: true,
+                    })}`,
+                  },
                 }).then(() => {
                   setDetails({})
                   alertDispatch({ type: 'success', payload: 'Post Deleted' })
@@ -167,7 +171,11 @@ const Post = ({ post }) => {
                     data: { postId: details._id, body: edited },
                     method: 'PATCH',
                     url: '/update_post',
-                    headers: { authorization: `Bearer ${cookies.get('jwt')}` },
+                    headers: {
+                      authorization: `Bearer ${cookies.get('jwt', {
+                        doNotParse: true,
+                      })}`,
+                    },
                   }).then((res) => {
                     alertDispatch({ type: 'success', payload: 'Post Updated' })
                     setDetails(res.data.post)

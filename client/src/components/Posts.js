@@ -15,7 +15,9 @@ const Posts = ({ user }) => {
       data: {
         id: user,
       },
-      headers: { Authorization: `Bearer ${cookies.get('jwt')}` },
+      headers: {
+        Authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
+      },
     }).then((res) => {
       if (mounted) {
         setPosts(res.data.posts)

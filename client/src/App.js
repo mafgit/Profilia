@@ -33,11 +33,13 @@ function App(props) {
   const [alertState, alertDispatch] = useReducer(alertReducer, alertInitState)
   const [state, dispatch] = useReducer(AuthReducer, initState)
   useEffect(() => {
-    if (cookies.get('jwt')) {
+    if (cookies.get('jwt', { doNotParse: true })) {
       axios({
         url: '/check_auth',
         method: 'GET',
-        headers: { authorization: `Bearer ${cookies.get('jwt')}` },
+        headers: {
+          authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
+        },
       }).then((res) => {
         if (res.data.error) {
           dispatch({ type: 'LOGOUT', payload: {} })

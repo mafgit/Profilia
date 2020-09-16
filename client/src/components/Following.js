@@ -13,7 +13,9 @@ const Following = ({ profileId, profileInfo, setProfileInfo, myId }) => {
     setLoading(true)
     axios({
       url: `/get_follow/following/${profileId}`,
-      headers: { authorization: `Bearer ${cookies.get('jwt')}` },
+      headers: {
+        authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
+      },
       method: 'GET',
     }).then((res) => {
       if (mounted) {
@@ -30,7 +32,10 @@ const Following = ({ profileId, profileInfo, setProfileInfo, myId }) => {
           <Link to={'/profile/' + following._id}>
             <img src={following.image} />
             <div className="follower-details">
-              <h1>{following.fullName}</h1>
+              <h1>
+                {following.fullName.slice(0, 10)}
+                {following.fullName.length > 10 ? '...' : ''}
+              </h1>
               <h3>{following.country}</h3>
             </div>
           </Link>
@@ -43,7 +48,11 @@ const Following = ({ profileId, profileInfo, setProfileInfo, myId }) => {
                 axios({
                   method: 'GET',
                   url: `/unfollow/${unfollowId}`,
-                  headers: { authorization: `Bearer ${cookies.get('jwt')}` },
+                  headers: {
+                    authorization: `Bearer ${cookies.get('jwt', {
+                      doNotParse: true,
+                    })}`,
+                  },
                 }).then((res) => {
                   // ...
                 })

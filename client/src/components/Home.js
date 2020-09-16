@@ -12,7 +12,9 @@ const Home = () => {
     axios({
       url: '/get_home',
       method: 'GET',
-      headers: { authorization: `Bearer ${cookies.get('jwt')}` },
+      headers: {
+        authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
+      },
     }).then((res) => {
       setPosts(res.data.posts)
       setLoading(false)

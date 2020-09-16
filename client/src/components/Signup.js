@@ -79,7 +79,8 @@ const Signup = (props) => {
                       if (res.data.token) {
                         cookies.set('jwt', res.data.token, {
                           path: '/',
-                          maxAge: 60 * 60 * 24 * 3,
+                          sameSite: true,
+                          httpOnly: true,
                         })
                         dispatch({
                           type: 'LOGIN',
@@ -121,19 +122,17 @@ const Signup = (props) => {
           }
         }}
       >
-        <div>
-          <h1
-            className="profilia-signup"
-            style={{
-              fontSize: 25,
-              width: '100%',
-              marginBottom: 10,
-              textAlign: 'center',
-            }}
-          >
-            PROFILIA | SIGNUP
-          </h1>
-        </div>
+        <h1
+          className="profilia-signup"
+          style={{
+            fontSize: 25,
+            width: '100%',
+            marginBottom: 10,
+            textAlign: 'center',
+          }}
+        >
+          PROFILIA | SIGNUP
+        </h1>
         <div>
           <label>Fullname</label>
           <input onChange={(e) => setFullName(e.target.value)} type="text" />

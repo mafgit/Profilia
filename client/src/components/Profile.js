@@ -22,7 +22,7 @@ const Profile = ({ match, history }) => {
       url: '/get_profile',
       data: { id: match.params.id },
       headers: {
-        Authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
+        authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
       },
     }).then((res) => {
       if (!res.data.error) {

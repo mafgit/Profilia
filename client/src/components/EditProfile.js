@@ -46,7 +46,7 @@ const EditProfile = (props) => {
       data: { fullName, bio, country },
       method: 'PATCH',
       headers: {
-        Authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
+        authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
       },
     }).then(() => {
       alertDispatch({ type: 'success', payload: 'Details Updated' })
@@ -78,7 +78,7 @@ const EditProfile = (props) => {
       data: { oldPassword, password, password2 },
       method: 'PATCH',
       headers: {
-        Authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
+        authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
       },
     }).then((res) => {
       if (res.data.error) {
@@ -95,7 +95,7 @@ const EditProfile = (props) => {
         id: state.user._id,
       },
       headers: {
-        Authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
+        authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
       },
     }).then((res) => {
       setProfileInfo(res.data.user)

@@ -16,7 +16,7 @@ const Posts = ({ user }) => {
         id: user,
       },
       headers: {
-        Authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
+        authorization: `Bearer ${cookies.get('jwt', { doNotParse: true })}`,
       },
     }).then((res) => {
       if (mounted) {

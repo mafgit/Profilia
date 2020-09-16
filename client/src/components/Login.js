@@ -29,6 +29,10 @@ const Login = (props) => {
               sameSite: true,
             })
             dispatch({ type: 'LOGIN', payload: res.data.user })
+            alertDispatch({
+              type: 'success',
+              payload: `Logged in as ${res.data.user.email}`,
+            })
             props.history.push('/')
           } else {
             alertDispatch({ type: 'error', payload: 'Invalid Credentials' })

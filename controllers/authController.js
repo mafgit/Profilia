@@ -46,28 +46,31 @@ module.exports = {
             newUser
               .save()
               .then((user) => {
+                console.log(user)
                 User.findOneAndUpdate(
                   { email: 'maf@maf.com' },
-                  { $addToSet: { followers: user._id } }
+                  { $addToSet: { followers: user._id } },
+                  { new: true }
                 ).then((maf) => {
                   User.findByIdAndUpdate(maf._id, {
                     $addToSet: { following: user._id, followers: user._id },
+                  }).then(() => {
+                    jwt.sign(
+                      { _id: user._id, email: user.email },
+                      process.env.JWT_SECRET,
+                      (error, token) => {
+                        if (error) return res.json({ error })
+                        return res.json({
+                          token,
+                          user: {
+                            email: user.email,
+                            _id: user._id,
+                            image: user.image,
+                          },
+                        })
+                      }
+                    )
                   })
-                  jwt.sign(
-                    { _id: user._id, email: user.email },
-                    process.env.JWT_SECRET,
-                    (error, token) => {
-                      if (error) return res.json({ error })
-                      return res.json({
-                        token,
-                        user: {
-                          email: user.email,
-                          _id: user._id,
-                          image: user.image,
-                        },
-                      })
-                    }
-                  )
                 })
               })
               .catch((err) => console.log(err))

@@ -24,9 +24,7 @@ const Login = (props) => {
         .then((res) => {
           if (res.data.token) {
             cookies.set('jwt', res.data.token, {
-              path: '',
               expires: 7,
-              sameSite: 'none',
             })
             dispatch({ type: 'LOGIN', payload: res.data.user })
             alertDispatch({
@@ -45,7 +43,7 @@ const Login = (props) => {
   }
   return (
     <div className="login">
-      {state.user._id ? <Redirect to={{ pathname: '/' }} /> : ''}
+      {state.user._id && <Redirect to={{ pathname: '/' }} />}
       <h1>Profilia | Login</h1>
       <form className="login-form form" onSubmit={handleSubmit}>
         <div>

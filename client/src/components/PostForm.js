@@ -49,7 +49,10 @@ const PostForm = ({ modal, setModal }) => {
           <h3 style={{ fontSize: 23, textAlign: 'center', marginBottom: 20 }}>
             Write something ...
           </h3>
-          <textarea onChange={(e) => setBody(e.target.value)}></textarea>
+          <textarea
+            value={body}
+            onChange={(e) => setBody(e.target.value)}
+          ></textarea>
           <div className="btns">
             <button
               type="button"

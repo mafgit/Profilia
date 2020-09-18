@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { AuthContext } from '../AuthContext'
+import { AlertContext } from '../App'
 import axios from 'axios'
 import cookies from 'js-cookie'
 import { Link } from 'react-router-dom'
 
 const Comments = ({ postId }) => {
+  const { alertDispatch } = useContext(AlertContext)
   const [comments, setComments] = useState([])
   const [body, setBody] = useState('')
   const { state } = useContext(AuthContext)
@@ -28,6 +30,7 @@ const Comments = ({ postId }) => {
           className="comment-input"
           placeholder="You can write a comment here"
           type="text"
+          value={body}
           onChange={(e) => setBody(e.target.value)}
         ></textarea>
         <button
@@ -47,6 +50,8 @@ const Comments = ({ postId }) => {
                 },
               }).then((res) => {
                 setComments([...comments, res.data.comment])
+                setBody('')
+                alertDispatch({ type: 'success', payload: 'Comment Added' })
               })
             }
           }}
@@ -81,7 +86,12 @@ const Comments = ({ postId }) => {
                           authorId: comment.author._id,
                           postId,
                         },
-                      }).then((res) => {})
+                      }).then((res) => {
+                        alertDispatch({
+                          type: 'success',
+                          payload: 'Comment Deleted',
+                        })
+                      })
                     }}
                   >
                     <i className="fa fa-trash"></i>

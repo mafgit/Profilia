@@ -79,7 +79,7 @@ const Signup = (props) => {
                         cookies.set('jwt', res.data.token, {
                           path: '',
                           expires: 7,
-                          sameSite: 'strict',
+                          sameSite: 'none',
                         })
                         dispatch({
                           type: 'LOGIN',

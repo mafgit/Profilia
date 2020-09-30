@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'
 import Navbar from './Navbar'
 import axios from 'axios'
-import { AuthContext } from '../App'
-import Cookies from 'universal-cookie'
+import { AuthContext } from '../AuthContext'
+import cookies from 'js-cookie'
+import { AlertContext } from '../App'
 
 const EditProfile = (props) => {
-  const cookies = new Cookies()
   const [countries, setCountries] = useState([])
   const { state } = useContext(AuthContext)
   const [profileInfo, setProfileInfo] = useState({})
@@ -19,6 +19,8 @@ const EditProfile = (props) => {
   const [bio, setBio] = useState('')
   const [country, setCountry] = useState('')
 
+  const { alertDispatch } = useContext(AlertContext)
+
   const changeTab = (clickedTab) => {
     document.querySelector('.active').classList.remove('active')
     clickedTab.className = 'active'
@@ -26,58 +28,63 @@ const EditProfile = (props) => {
   }
 
   const updateDetails = () => {
-    const errors = []
     if (!fullName) {
-      errors.push('Fullname must not be empty')
-    }
-    if (!country) {
-      errors.push('Please select a country')
-    }
-    if (errors[0]) {
-      // notify
-      console.log(errors)
-      return errors
-    } else {
-      axios({
-        url: '/update_details',
-        data: { fullName, bio, country },
-        method: 'PATCH',
-        headers: { Authorization: `Bearer ${cookies.get('jwt')}` },
-      }).then((res) => {
-        console.log(res.data)
+      return alertDispatch({
+        type: 'error',
+        payload: 'Fullname must not be empty',
       })
     }
+    if (!country) {
+      return alertDispatch({
+        type: 'error',
+        payload: 'Please select a country',
+      })
+    }
+    axios({
+      url: '/update_details',
+      data: { fullName, bio, country },
+      method: 'PATCH',
+      headers: {
+        authorization: `Bearer ${cookies.get('jwt')}`,
+      },
+    }).then(() => {
+      alertDispatch({ type: 'success', payload: 'Details Updated' })
+    })
   }
 
   const updatePw = () => {
-    const errors = []
     if (password2 !== password) {
-      errors.push('Passwords must match')
+      return alertDispatch({ type: 'error', payload: 'Passwords must match' })
     }
     if (
       oldPassword.length < 6 ||
       password2.length < 6 ||
       password2.length < 6
     ) {
-      errors.push('Passwords must be at least 6 characters long')
-    }
-    if (!oldPassword || !password2 || !password2) {
-      errors.push('You must fill all three fields')
-    }
-    if (errors[0]) {
-      // notify
-      console.log(errors)
-      return errors
-    } else {
-      axios({
-        url: 'update_pw',
-        data: { oldPassword, password, password2 },
-        method: 'PATCH',
-        headers: { Authorization: `Bearer ${cookies.get('jwt')}` },
-      }).then((res) => {
-        console.log(res.data)
+      return alertDispatch({
+        type: 'error',
+        payload: 'Passwords must be at least 6 characters long',
       })
     }
+    if (!oldPassword || !password2 || !password2) {
+      return alertDispatch({
+        type: 'error',
+        payload: 'You must fill all three fields',
+      })
+    }
+    axios({
+      url: 'update_pw',
+      data: { oldPassword, password, password2 },
+      method: 'PATCH',
+      headers: {
+        authorization: `Bearer ${cookies.get('jwt')}`,
+      },
+    }).then((res) => {
+      if (res.data.error) {
+        return alertDispatch({ type: 'error', payload: res.data.error })
+      }
+      return alertDispatch({ type: 'success', payload: 'Password Updated' })
+    })
   }
   useEffect(() => {
     axios({
@@ -86,7 +93,9 @@ const EditProfile = (props) => {
       data: {
         id: state.user._id,
       },
-      headers: { Authorization: `Bearer ${cookies.get('jwt')}` },
+      headers: {
+        authorization: `Bearer ${cookies.get('jwt')}`,
+      },
     }).then((res) => {
       setProfileInfo(res.data.user)
       setLoading(false)
@@ -104,7 +113,6 @@ const EditProfile = (props) => {
       setCountries(res.data.map((country) => country.name))
     })
   }, [])
-  const validate = (e) => {}
   return (
     <>
       <Navbar />
@@ -182,15 +190,21 @@ const EditProfile = (props) => {
                   props.history.push(`/profile/${state.user._id}`)
                 }}
               >
-                Discard Changes
+                &times;
               </button>
               {tab === 'Details' ? (
-                <button className="save-btn" onClick={(e) => updateDetails(e)}>
-                  Save Changes
+                <button
+                  className="save-btn green-btn"
+                  onClick={(e) => updateDetails(e)}
+                >
+                  <i className="fa fa-save"></i>
                 </button>
               ) : (
-                <button className="save-btn" onClick={(e) => updatePw(e)}>
-                  Save Password
+                <button
+                  className="save-btn green-btn"
+                  onClick={(e) => updatePw(e)}
+                >
+                  <i className="fa fa-save"></i>
                 </button>
               )}
             </div>

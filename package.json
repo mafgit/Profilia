@@ -1,16 +1,21 @@
 {
 	"name": "profilia",
 	"version": "1.0.0",
-	"description": "",
+	"description": "A Simple Social Media Web App",
 	"main": "app.js",
 	"scripts": {
 		"start": "node app.js",
 		"server": "nodemon app.js",
 		"client": "cd client && npm start",
-		"dev": "concurrently \"npm run server\" \"npm run client\""
+		"dev": "concurrently \"npm run server\" \"npm run client\"",
+		"heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
 	},
-	"keywords": [],
-	"author": "",
+	"keywords": [
+		"social media",
+		"social",
+		"media"
+	],
+	"author": "maf",
 	"license": "ISC",
 	"dependencies": {
 		"bcrypt": "^5.0.0",
@@ -19,6 +24,6 @@
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
 		"jsonwebtoken": "^8.5.1",
-		"mongoose": "^5.10.6"
+		"mongoose": "^5.10.5"
 	}
 }

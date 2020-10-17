@@ -62,6 +62,11 @@ module.exports = {
 												if (error) return res.json({ error })
 												res.cookie('jwt', token, {
 													maxAge: 7 * 24 * 60 * 60 * 1000,
+													httpOnly: true,
+													secure:
+														process.env.NODE_ENV === 'production'
+															? true
+															: false,
 												})
 												return res.status(200).json({
 													user: {
@@ -92,7 +97,12 @@ module.exports = {
 								{ _id: user._id, email },
 								process.env.JWT_SECRET,
 								(err, token) => {
-									res.cookie('jwt', token, { maxAge: 7 * 24 * 60 * 60 * 1000 })
+									res.cookie('jwt', token, {
+										maxAge: 7 * 24 * 60 * 60 * 1000,
+										httpOnly: true,
+										secure:
+											process.env.NODE_ENV === 'production' ? true : false,
+									})
 									return res.status(200).json({
 										user: {
 											email: user.email,

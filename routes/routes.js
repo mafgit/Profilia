@@ -27,6 +27,10 @@ const {
 router.post('/signup', signup_post)
 router.post('/login', login_post)
 router.get('/check_auth', verifyToken, check_auth)
+router.get('/logout', verifyToken, (req, res) => {
+	res.clearCookie('jwt')
+	return res.send('Logged Out')
+})
 
 // get data
 router.get('/get_home', verifyToken, get_home)

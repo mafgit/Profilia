@@ -979,3 +979,12 @@ textarea::placeholder {
 		display: block;
 	}
 }
+
+@media (max-width: 550px) {
+  .custom-toast {
+    width: max-content;
+    margin: 10px auto;
+    min-width: 70%;
+    max-width: 95%;
+	}
+}

@@ -1,7 +1,7 @@
 const User = require('../models/User')
 const Comment = require('../models/Comment')
 const Post = require('../models/Post')
-const ObjectId = require('mongoose').Types.ObjectId
+// const  = require('mongoose').Types.
 
 module.exports = {
 	get_profile: (req, res) => {
@@ -13,7 +13,7 @@ module.exports = {
 		})
 	},
 	get_posts: (req, res) => {
-		Post.find({ author: ObjectId(req.body.id) })
+		Post.find({ author: req.body.id })
 			.sort({ createdAt: -1 })
 			.populate('author', 'image fullName _id')
 			.exec((err, posts) => {
@@ -21,8 +21,8 @@ module.exports = {
 			})
 	},
 	get_follow: (req, res) => {
-		const { id, follow } = req.params
-		User.findById(ObjectId(id), (err, user) => {
+		const { _id, follow } = req.params
+		User.findById(_id, (err, user) => {
 			User.find({ _id: { $in: user[follow] } }).then((result) => {
 				res.json({
 					result: result.map((f) => ({
@@ -39,7 +39,7 @@ module.exports = {
 		const { body } = req.body
 		User.findById(req.userId, (err, user) => {
 			Post.create({
-				body: body.slice(0, 300),
+				body: body.slice(0, 350),
 				author: req.userId,
 				likes: [],
 			}).then((post) => {
@@ -67,23 +67,24 @@ module.exports = {
 			})
 	},
 	search_users: (req, res) => {
-		const query = req.params.query.replace(/\+/gi, ' ')
-		let regexp = new RegExp(query, 'gi')
-		User.find({ fullName: { $regex: regexp } })
-			.then((users) => res.json({ users }))
-			.catch((err) => console.log(err))
+		const { q } = req.query
+		let regexp = new RegExp(q, 'gi')
+		User.find({
+			$or: [{ fullName: regexp }, { country: regexp }],
+		}).then((users) => {
+			res.json({ users })
+		})
 	},
 
 	change_follow: (req, res) => {
-		const id = ObjectId(req.params.id)
-		const { type } = req.params
-		if (!req.userId.equals(id)) {
+		const { _id, type } = req.params
+		if (!req.userId.equals(_id)) {
 			const update1 =
 				type === 'follow'
 					? {
-							$addToSet: { following: id },
+							$addToSet: { following: _id },
 					  }
-					: { $pull: { following: id } }
+					: { $pull: { following: _id } }
 			const update2 =
 				type === 'follow'
 					? {
@@ -95,7 +96,7 @@ module.exports = {
 
 			Promise.all([
 				User.findByIdAndUpdate(req.userId, update1, { new: true }),
-				User.findByIdAndUpdate(id, update2, { new: true }),
+				User.findByIdAndUpdate(_id, update2, { new: true }),
 			]).then((result) => {
 				res.json({
 					followers: result[1].followers,
@@ -132,7 +133,7 @@ module.exports = {
 		}
 	},
 	delete_post: (req, res) => {
-		const id = ObjectId(req.body.id)
+		const id = req.body.id
 		Post.findById(id, (err, post) => {
 			if (post.author.equals(req.userId)) {
 				Post.findByIdAndDelete(id).then(() => {
@@ -159,7 +160,7 @@ module.exports = {
 		})
 	},
 	load_comments: (req, res) => {
-		Comment.find({ postId: ObjectId(req.body.postId) })
+		Comment.find({ postId: req.body.postId })
 			.populate('author', 'image fullName _id')
 			.then((comments) => {
 				res.json({ comments: comments })
@@ -179,8 +180,8 @@ module.exports = {
 		})
 	},
 	delete_comment: (req, res) => {
-		if (req.userId.equals(ObjectId(req.body.authorId))) {
-			Comment.findByIdAndDelete(ObjectId(req.body.commentId)).then(() => {
+		if (req.userId.equals(req.body.authorId)) {
+			Comment.findByIdAndDelete(req.body.commentId).then(() => {
 				res.json({ success: 'Comment Deleted Successfully' })
 			})
 		}

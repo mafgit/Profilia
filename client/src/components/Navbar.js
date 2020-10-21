@@ -1,22 +1,23 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { Link, useHistory, withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import PostForm from './PostForm'
 import { AuthContext } from '../AuthContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-const Navbar = (props) => {
+const Navbar = ({ history }) => {
 	const [modal, setModal] = useState(false)
 
 	const [search, setSearch] = useState('')
 	const [opened, setOpened] = useState(false)
 	const [navbarModal, setNavbarModal] = useState(false)
-	const history = useHistory()
 	const { state, dispatch } = useContext(AuthContext)
+
 	const toSearchPage = () => {
 		if (search.trim().length) {
-			history.push({ pathname: `/search/${search.trim().replace(/ /gi, '+')}` })
+			history.push(`/search?q=${search.trim()}`)
 		}
 	}
+
 	return (
 		<div className="navbar">
 			<div>
@@ -65,7 +66,7 @@ const Navbar = (props) => {
 							onClick={() => {
 								axios.get('/logout').then(() => {
 									dispatch({ type: 'LOGOUT' })
-									props.history.push('/login')
+									history.push('/login')
 									toast.success('Logged out', { className: 'custom-toast' })
 								})
 							}}

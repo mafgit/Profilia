@@ -7,7 +7,7 @@ const verifyToken = (req, res, next) => {
 			if (decoded) {
 				req.userEmail = decoded.email
 				req.userId = ObjectId(decoded._id)
-				return next()
+				next()
 			} else {
 				res.clearCookie('jwt')
 				return res.status(401).json({ error: 'Unauthorized' })

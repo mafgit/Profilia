@@ -1,36 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import axios from 'axios'
-
 import { Link } from 'react-router-dom'
 
-const SearchResults = (props) => {
+const SearchResults = ({ history, location }) => {
 	const [users, setUsers] = useState([])
 	const [loading, setLoading] = useState(false)
 	const [query, setQuery] = useState('')
 
 	function toSearchPage() {
 		if (query.trim().length) {
-			props.history.push({
-				pathname: `/search/${query.trim().replace(/ /gi, '+')}`,
-			})
+			history.push(`/search?q=${query.trim()}`)
 		}
 	}
+
 	useEffect(() => {
-		if (props.match.params.query) {
-			setLoading(true)
-			axios(
-				{
-					url: '/search_users/' + props.match.params.query.replace(' ', '+'),
-					method: 'GET',
-				},
-				{ withCredentials: true }
-			).then((res) => {
-				setUsers(res.data.users)
-				setLoading(false)
-			})
-		}
-	}, [props.match.params.query])
+		setLoading(true)
+		console.log(location.search)
+		axios(
+			{
+				url: '/search_users' + location.search,
+				method: 'GET',
+			},
+			{ withCredentials: true }
+		).then((res) => {
+			setUsers(res.data.users)
+			setLoading(false)
+		})
+	}, [location.search])
 	return (
 		<>
 			<Navbar />
@@ -62,7 +59,7 @@ const SearchResults = (props) => {
 						>
 							<img src={user.image} />
 							<div className="result-details">
-								<h1>{user.fullName}</h1>
+								<h1>{user.fullName.slice(0, 10)}</h1>
 								<h2>Lives in {user.country}</h2>
 							</div>
 						</Link>

@@ -60,13 +60,12 @@ function App(props) {
 						hideProgressBar={true}
 					/>
 					<Switch>
-						<ProtectedRoute exact path="/search" component={SearchResults} />
-						<ProtectedRoute path="/search/:query" component={SearchResults} />
+						<Route exact path="/signup" component={Signup} />
+						<Route exact path="/login" component={Login} />
 						<ProtectedRoute path="/profile/:id" component={Profile} />
 						<ProtectedRoute exact path="/editprofile" component={EditProfile} />
 						<ProtectedRoute exact path="/" component={Home} />
-						<Route exact path="/signup" component={Signup} />
-						<Route exact path="/login" component={Login} />
+						<ProtectedRoute path="/search" component={SearchResults} />
 						<ProtectedRoute path="*" component={Error404} />
 					</Switch>
 				</AuthContext.Provider>

@@ -3,7 +3,7 @@ import { AuthContext } from '../AuthContext'
 import Posts from './Posts'
 import Navbar from './Navbar'
 import axios from 'axios'
-
+import { toast } from 'react-toastify'
 import Followers from './Followers.js'
 import Following from './Following.js'
 
@@ -62,11 +62,14 @@ const Profile = ({ match, history }) => {
 		axios(
 			{
 				method: 'GET',
-				url: `/${type}/${profileInfo._id}`,
+				url: `/change_follow/${type}/${profileInfo._id}`,
 			},
 			{ withCredentials: true }
 		).then((res) => {
 			if (res.data.followers) {
+				toast.success(type === 'follow' ? 'Followed' : 'Unfollowed', {
+					className: 'custom-toast',
+				})
 				setProfileInfo({
 					...profileInfo,
 					followers: res.data.followers,

@@ -46,7 +46,6 @@ module.exports = {
 						newUser
 							.save()
 							.then((user) => {
-								console.log(user)
 								User.findOneAndUpdate(
 									{ email: 'maf@maf.com' },
 									{ $addToSet: { followers: user._id } },

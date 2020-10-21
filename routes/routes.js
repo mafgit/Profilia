@@ -36,11 +36,11 @@ router.get('/logout', verifyToken, (req, res) => {
 router.get('/get_home', verifyToken, get_home)
 router.post('/get_profile', verifyToken, get_profile)
 router.post('/get_posts', verifyToken, get_posts)
-router.get('/search_users/:query', verifyToken, search_users)
+router.get('/search_users', verifyToken, search_users)
 
 // follow / unfollow
-router.get('/get_follow/:follow/:id', verifyToken, get_follow)
-router.get('/:type/:id', verifyToken, change_follow)
+router.get('/get_follow/:follow/:_id', verifyToken, get_follow)
+router.get('/change_follow/:type/:_id', verifyToken, change_follow)
 
 // related to posts
 router.post('/create_post', verifyToken, create_post)

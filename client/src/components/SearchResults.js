@@ -63,7 +63,7 @@ const SearchResults = ({ history, location }) => {
               id={'u' + user._id}
               className="search-result"
             >
-              <img src={user.image} />
+              <img src={user.image} alt="" />
               <div className="result-details">
                 <h1>{user.fullName.slice(0, 10)}</h1>
                 <h2>Lives in {user.country}</h2>
@@ -71,7 +71,7 @@ const SearchResults = ({ history, location }) => {
             </motion.div>
           ))
         ) : loading ? (
-          <h2 className="loading-profile"></h2>
+          <i className="loading-profile"></i>
         ) : (
           <div className="no-data-msg-div">
             <h3 className="no-data-msg">No Results</h3>

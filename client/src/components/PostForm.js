@@ -43,12 +43,12 @@ const PostForm = ({ modal, setModal }) => {
               },
               { withCredentials: true }
             ).then((res) => {
-              toast.success('Post Created', { className: 'custom-toast' })
+              toast.success('Post Created')
               setModal(false)
               setBody('')
             })
           } else {
-            toast.warn(`Post can't be empty`, { className: 'custom-toast' })
+            toast.warn(`Post can't be empty`)
           }
         }}
       >

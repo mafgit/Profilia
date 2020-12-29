@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect } from 'react'
+import React, { useReducer, useEffect } from 'react'
 import {
   BrowserRouter as Router,
   Route,
@@ -14,7 +14,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import SearchResults from './components/SearchResults'
 import Error404 from './components/Error404'
 import EditProfile from './components/EditProfile'
-import { toast, ToastContainer } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 
 import 'react-toastify/dist/ReactToastify.css'
 import './App.css'
@@ -38,9 +38,6 @@ function App() {
       .then((res) => {
         if (res.data.user) {
           dispatch({ type: 'LOGIN', payload: res.data.user })
-          // toast.success('Logged in as ' + res.data.user.email, {
-          //   className: 'custom-toast',
-          // })
         }
       })
       .catch((err) => {

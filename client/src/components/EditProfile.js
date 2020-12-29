@@ -27,14 +27,10 @@ const EditProfile = (props) => {
 
   const updateDetails = () => {
     if (!fullName) {
-      return toast.warn('Fullname must not be empty', {
-        className: 'custom-toast',
-      })
+      return toast.warn('Fullname must not be empty')
     }
     if (!country) {
-      return toast.warn('Please select a country', {
-        className: 'custom-toast',
-      })
+      return toast.warn('Please select a country')
     }
     axios(
       {
@@ -43,9 +39,7 @@ const EditProfile = (props) => {
         method: 'PATCH',
       },
       { withCredentials: true }
-    ).then(() =>
-      toast.success('Details Updated', { className: 'custom-toast' })
-    )
+    ).then(() => toast.success('Details Updated'))
   }
 
   const updatePw = () => {
@@ -60,9 +54,7 @@ const EditProfile = (props) => {
       return toast.warn('Passwords must be at least 6 characters long')
     }
     if (!oldPassword || !password2 || !password2) {
-      return toast.warn('You must fill all three fields', {
-        className: 'custom-toast',
-      })
+      return toast.warn('You must fill all three fields')
     }
     axios(
       {
@@ -73,9 +65,9 @@ const EditProfile = (props) => {
       { withCredentials: true }
     ).then((res) => {
       if (res.data.error) {
-        return toast.warn(res.data.error, { className: 'custom-toast' })
+        return toast.warn(res.data.error)
       }
-      return toast.success('Password Updated', { className: 'custom-toast' })
+      return toast.success('Password Updated')
     })
   }
   useEffect(() => {
@@ -207,7 +199,7 @@ const EditProfile = (props) => {
           </div>
         </motion.div>
       ) : (
-        <h3 className="loading-profile"></h3>
+        <i className="loading-profile"></i>
       )}
     </>
   )

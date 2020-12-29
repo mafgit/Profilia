@@ -34,7 +34,7 @@ const Posts = ({ user }) => {
           <h3 className="no-data-msg">No Posts</h3>
         </div>
       ) : (
-        <h3 className="loading-h3"></h3>
+        <i className="loading-i"></i>
       )}
     </div>
   )

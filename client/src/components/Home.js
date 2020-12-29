@@ -33,7 +33,7 @@ const Home = () => {
             </h2>
           </>
         ) : (
-          <h2 className="loading-h3"></h2>
+          <i className="loading-i"></i>
         )}
       </div>
     </>

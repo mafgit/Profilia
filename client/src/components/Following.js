@@ -28,7 +28,7 @@ const Following = ({ profileId, myId }) => {
       {following.map((following) => (
         <div className="follower" id={'u' + following._id} key={following._id}>
           <Link to={'/profile/' + following._id}>
-            <img src={following.image} />
+            <img src={following.image} alt="" />
             <div className="follower-details">
               <h1>
                 {following.fullName.slice(0, 10)}
@@ -61,9 +61,9 @@ const Following = ({ profileId, myId }) => {
       ))}
     </div>
   ) : !loading && !following[0] ? (
-    <h3 className="loading-h3">Not following anyone.</h3>
+    <h3 className="loading-i">Not following anyone.</h3>
   ) : (
-    <h3 className="loading-h3"></h3>
+    <i className="loading-i"></i>
   )
 }
 

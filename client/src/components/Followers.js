@@ -33,7 +33,7 @@ const Followers = ({ profileId }) => {
           id={'u' + follower._id}
           key={follower._id}
         >
-          <img src={follower.image} />
+          <img src={follower.image} alt="" />
           <div className="follower-details">
             <h1>
               {follower.fullName.slice(0, 10)}
@@ -49,7 +49,7 @@ const Followers = ({ profileId }) => {
       <h3 className="no-data-msg">No followers</h3>
     </div>
   ) : (
-    <h3 className="loading-h3"></h3>
+    <i className="loading-i"></i>
   )
 }
 

@@ -349,7 +349,7 @@ i,
   align-items: center;
   display: flex;
   color: #fff;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
 }
 
@@ -364,6 +364,12 @@ i,
 }
 .btns .green-btn {
   background-color: #03aa64;
+}
+.login form label,
+.signup form label,
+.login form a,
+.signup form a {
+  font-size: 18px;
 }
 .login form,
 .signup form {
@@ -561,7 +567,8 @@ textarea {
   align-items: center;
 }
 
-.loading-h3 {
+.loading-i {
+  display: block;
   border: 3px solid #1c1c1c;
   border-top: 3px solid #fff;
   border-radius: 50%;
@@ -570,7 +577,7 @@ textarea {
   animation: spin 1s linear infinite;
   margin: 30px auto;
 }
-.home .loading-h3 {
+.home .loading-i {
   margin-top: 60px;
 }
 
@@ -675,6 +682,7 @@ textarea {
 }
 .flag {
   width: 30px;
+  height: 20px;
   border-radius: 3px;
   margin-right: 5px;
 }
@@ -742,6 +750,10 @@ textarea {
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 15px;
+}
+.comment-author-details img {
+  width: 40px;
+  height: 40px;
 }
 .comment {
   background-color: var(--dark-dark);
@@ -813,12 +825,6 @@ textarea::placeholder {
   color: rgb(226, 222, 222);
 }
 
-.custom-toast {
-  border-radius: 10px !important;
-  font-size: 20px !important;
-  padding: 10px !important;
-  text-align: center !important;
-}
 .Toastify__toast--warning {
   background-color: #ff6600 !important;
 }
@@ -828,6 +834,15 @@ textarea::placeholder {
 .Toastify__toast--info {
   background-color: #ecf000 !important;
 }
+
+.Toastify__toast {
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 18px;
+  padding: 20px;
+  text-align: center;
+}
+
 .profilia-signup {
   display: none;
 }

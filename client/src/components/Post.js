@@ -66,7 +66,7 @@ const Post = ({ post }) => {
           to={'/profile/' + details.author._id}
           className="post-author-details"
         >
-          <img className="post-profile-pic" src={details.author.image} />
+          <img className="post-profile-pic" alt="" src={details.author.image} />
           <h2>{details.author.fullName.split(' ')[0].slice(0, 9)}</h2>
         </Link>
         <div className="post-options">
@@ -151,7 +151,7 @@ const Post = ({ post }) => {
                   { withCredentials: true }
                 ).then(() => {
                   setDetails({})
-                  toast.success('Post Deleted', { className: 'custom-toast' })
+                  toast.success('Post Deleted')
                   setDeleteModal(false)
                 })
               }}
@@ -191,9 +191,7 @@ const Post = ({ post }) => {
                     },
                     { withCredentials: true }
                   ).then((res) => {
-                    toast.success('Post updated', {
-                      className: 'custom-toast',
-                    })
+                    toast.success('Post updated')
                     setDetails(res.data.post)
                     setEditModal(false)
                   })

@@ -68,9 +68,7 @@ const Profile = ({ match, history }) => {
       { withCredentials: true }
     ).then((res) => {
       if (res.data.followers) {
-        toast.success(type === 'follow' ? 'Followed' : 'Unfollowed', {
-          className: 'custom-toast',
-        })
+        toast.success(type === 'follow' ? 'Followed' : 'Unfollowed')
         setProfileInfo({
           ...profileInfo,
           followers: res.data.followers,
@@ -118,7 +116,7 @@ const Profile = ({ match, history }) => {
                 animate={{ x: '0' }}
                 className="country-div"
               >
-                {flag ? <img className="flag" src={flag} /> : ''}
+                {flag ? <img className="flag" src={flag} alt="" /> : ''}
                 {profileInfo.country}
               </motion.h3>
               <motion.q initial={{ x: '-50vw' }} animate={{ x: '0' }}>
@@ -201,7 +199,7 @@ const Profile = ({ match, history }) => {
           )}
         </div>
       ) : (
-        <h2 className="loading-profile"></h2>
+        <i className="loading-profile"></i>
       )}
     </>
   )

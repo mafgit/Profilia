@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import PostForm from './PostForm'
 import { AuthContext } from '../AuthContext'
@@ -55,7 +55,7 @@ const Navbar = ({ history }) => {
             className="pic ul-a"
             onClick={() => setNavbarModal(!navbarModal)}
           >
-            <img className="navbar-pic" src={state.user.image} />
+            <img className="navbar-pic" src={state.user.image} alt="" />
           </button>
 
           <div
@@ -72,7 +72,7 @@ const Navbar = ({ history }) => {
                 axios.get('/logout').then(() => {
                   dispatch({ type: 'LOGOUT' })
                   history.push('/login')
-                  toast.success('Logged out', { className: 'custom-toast' })
+                  toast.success('Logged out')
                 })
               }}
             >

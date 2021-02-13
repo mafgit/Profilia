@@ -62,8 +62,12 @@ const Profile = ({ match, history }) => {
   const changeFollow = (type) => {
     axios(
       {
-        method: 'GET',
-        url: `/change_follow/${type}/${profileInfo._id}`,
+        method: 'POST',
+        url: `/change_follow`,
+        data: {
+          type,
+          _id: profileInfo._id,
+        },
       },
       { withCredentials: true }
     ).then((res) => {

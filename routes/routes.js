@@ -1,26 +1,26 @@
 const router = require('express').Router()
 const verifyToken = require('../middlewares/verifyToken')
 const {
-	signup_post,
-	login_post,
-	check_auth,
-	update_pw,
+  signup_post,
+  login_post,
+  check_auth,
+  update_pw,
 } = require('../controllers/authController')
 const {
-	get_profile,
-	delete_comment,
-	get_posts,
-	get_follow,
-	create_post,
-	get_home,
-	change_post_like,
-	change_follow,
-	search_users,
-	update_details,
-	delete_post,
-	update_post,
-	add_comment,
-	load_comments,
+  get_profile,
+  delete_comment,
+  get_posts,
+  get_follow,
+  create_post,
+  get_home,
+  change_post_like,
+  change_follow,
+  search_users,
+  update_details,
+  delete_post,
+  update_post,
+  add_comment,
+  load_comments,
 } = require('../controllers/dataController')
 
 // auth
@@ -28,8 +28,8 @@ router.post('/signup', signup_post)
 router.post('/login', login_post)
 router.get('/check_auth', verifyToken, check_auth)
 router.get('/logout', (req, res) => {
-	res.clearCookie('jwt')
-	return res.send('Logged Out')
+  res.clearCookie('jwt')
+  return res.send('Logged Out')
 })
 
 // get data
@@ -39,8 +39,8 @@ router.post('/get_posts', verifyToken, get_posts)
 router.get('/search_users', verifyToken, search_users)
 
 // follow / unfollow
-router.get('/get_follow/:follow/:_id', verifyToken, get_follow)
-router.get('/change_follow/:type/:_id', verifyToken, change_follow)
+router.get('/get_follow/:type/:_id', verifyToken, get_follow)
+router.post('/change_follow', verifyToken, change_follow)
 
 // related to posts
 router.post('/create_post', verifyToken, create_post)

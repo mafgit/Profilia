@@ -36,14 +36,13 @@ function App() {
       { withCredentials: true }
     )
       .then((res) => {
-        if (res.data.user) {
-          dispatch({ type: 'LOGIN', payload: res.data.user })
-        }
+        if (res.data.user)
+          return dispatch({ type: 'LOGIN', payload: res.data.user })
       })
       .catch((err) => {
         if (err) {
           dispatch({ type: 'LOGOUT' })
-          history.push('/login')
+          return history.push('/login')
         }
       })
   }, [])
@@ -63,7 +62,7 @@ function App() {
             <ProtectedRoute exact path="/editprofile" component={EditProfile} />
             <ProtectedRoute exact path="/" component={Home} />
             <ProtectedRoute path="/search" component={SearchResults} />
-            <ProtectedRoute path="*" component={Error404} />
+            <ProtectedRoute path="/*" component={Error404} />
           </Switch>
         </AuthContext.Provider>
       </Router>

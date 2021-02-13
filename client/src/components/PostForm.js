@@ -39,7 +39,7 @@ const PostForm = ({ modal, setModal }) => {
               {
                 url: '/create_post',
                 method: 'POST',
-                data: { body },
+                data: { body: body.trim() },
               },
               { withCredentials: true }
             ).then((res) => {

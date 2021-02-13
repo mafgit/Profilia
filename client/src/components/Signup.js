@@ -56,9 +56,9 @@ const Signup = (props) => {
                     data: {
                       password,
                       password2,
-                      email,
-                      country,
-                      fullName,
+                      email: email.trim(),
+                      country: country.trim(),
+                      fullName: fullName.trim(),
                     },
                     withCredentials: true,
                   })

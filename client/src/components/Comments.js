@@ -42,7 +42,7 @@ const Comments = ({ postId }) => {
                   url: '/add_comment',
                   data: {
                     postId,
-                    body,
+                    body: body.trim(),
                     author: state.user._id,
                   },
                 },

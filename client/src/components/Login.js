@@ -17,7 +17,7 @@ const Login = () => {
       axios({
         url: '/login',
         method: 'POST',
-        data: { email, password },
+        data: { email: email.trim(), password },
       })
         .then((res) => {
           if (res.data.user) {

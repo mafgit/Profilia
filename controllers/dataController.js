@@ -27,7 +27,6 @@ module.exports = {
       .populate(type.toLowerCase(), 'fullName country image _id')
       .lean()
       .then((users) => {
-        console.log(users)
         res.json({ result: users[type.toLowerCase()] })
       })
   },

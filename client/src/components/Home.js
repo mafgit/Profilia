@@ -7,17 +7,23 @@ const Home = () => {
   const [posts, setPosts] = useState([])
   const [loading, setLoading] = useState(true)
   useEffect(() => {
-    setLoading(true)
-    axios(
-      {
-        url: '/get_home',
-        method: 'GET',
-      },
-      { withCredentials: true }
-    ).then((res) => {
-      setPosts(res.data.posts || [])
-      setLoading(false)
-    })
+    let mounted = true
+
+    if (mounted) {
+      setLoading(true)
+      axios(
+        {
+          url: '/get_home',
+          method: 'GET',
+        },
+        { withCredentials: true }
+      ).then((res) => {
+        setPosts(res.data.posts || [])
+        setLoading(false)
+      })
+    }
+
+    return () => (mounted = false)
   }, [])
   return (
     <>

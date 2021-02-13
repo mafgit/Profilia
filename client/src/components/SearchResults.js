@@ -16,7 +16,6 @@ const SearchResults = ({ history, location }) => {
 
   useEffect(() => {
     setLoading(true)
-    console.log(location.search)
     axios(
       {
         url: '/search_users' + location.search,

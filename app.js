@@ -10,7 +10,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const app = express()
-app.use(helmet())
+app.use(helmet({ contentSecurityPolicy: false }))
 app.use(cookieParser())
 app.use(cors())
 app.use(express.urlencoded({ extended: true }))

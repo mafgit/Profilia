@@ -71,3 +71,7 @@ function App() {
 }
 
 export default App
+// TODO: load more posts in Home.js, Profile.js, Posts.js
+// TODO: load more comments
+// TODO: load more followers and following
+// TODO: Follow Suggestions

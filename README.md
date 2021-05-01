@@ -14,5 +14,4 @@ A Simple CRUD Social Media Web App made using the MERN stack
 1) Create a file called `.env` in the root and put these values in:
     - MONGODB_URI
     - JWT_SECRET
-    - JWT_EXPIRES
 1) Run `npm run dev` in the root of the repo to start the server and the client.

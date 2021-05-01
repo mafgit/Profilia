@@ -5,7 +5,7 @@ import axios from 'axios'
 import { AuthContext } from '../AuthContext'
 import { toast } from 'react-toastify'
 const Signup = (props) => {
-  const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+  const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
   const [countries, setCountries] = useState([])
   const [fullName, setFullName] = useState('')
   const [email, setEmail] = useState('')

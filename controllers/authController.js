@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 const User = require('../models/User')
 const ObjectId = require('mongoose').Types.ObjectId
 
-const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
 
 module.exports = {
   signup_post: (req, res) => {

@@ -102,7 +102,7 @@ const Post = ({ post }) => {
       <div className="post-likes-comments">
         <div
           className={
-            details.likes.includes(state.user.email)
+            details.likes.includes(state.user._id)
               ? 'post-like liked'
               : 'post-like'
           }

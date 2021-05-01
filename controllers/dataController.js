@@ -45,17 +45,18 @@ module.exports = {
     let updates = {}
     if (type === 'like') {
       updates = {
-        $addToSet: { likes: req.userEmail },
+        $addToSet: { likes: req.userId },
       }
     } else if (type === 'unlike') {
       updates = {
-        $pull: { likes: req.userEmail },
+        $pull: { likes: req.userId },
       }
     }
     Post.findByIdAndUpdate(postId, updates, { new: true })
       .populate('author')
       .then((post) => res.json({ post }))
   },
+
   search_users: (req, res) => {
     const { q } = req.query
     let regexp = new RegExp(q, 'gi')

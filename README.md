@@ -1,4 +1,4 @@
-# Profilia
+# Profilia [Project has been abandoned]
 A Simple CRUD Social Media Web App made using the MERN stack
 
 ![profilia image](https://raw.githubusercontent.com/mafgit/Profilia/master/profilia.PNG)
